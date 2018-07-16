@@ -7,8 +7,8 @@ export default class AKS extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.btn_group}>
-          <Button style={styles.btn}>AKS</Button>
-          <Button style={styles.btn}>AKS</Button>
+          <Button style={styles.btn}>购纸</Button>
+          <Button style={styles.btn}>购油</Button>
         </View>
         <View style={styles.btn_group}>
           <Button style={styles.btn}>AKS</Button>
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   btn_group:{
-    // flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-around',
     width: 100
