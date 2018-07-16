@@ -3,6 +3,7 @@ import {SearchBar ,TabBar} from 'antd-mobile-rn';
 import { StyleSheet, Text, View } from 'react-native';
 import AKS from './src/pages/AKS';
 import Setting from './src/pages/Setting';
+import ShoppingConfig from './src/pages/ShoppingConfig';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -49,7 +50,7 @@ export default class App extends React.Component {
           selected={this.state.selectedTab === 'blueTab'}
           onPress={() => this.onChangeTab('blueTab')}
         >
-          <Setting />
+          <ShoppingConfig />
         </TabBar.Item>
         <TabBar.Item
           icon={require('./src/styles/imgs/friend.png')}

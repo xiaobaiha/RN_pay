@@ -8,16 +8,16 @@ export default class AKS extends React.Component {
     return (
       <View style={styles.container}>
         <List renderHeader={() => '设置'}>
-          <Item disabled arrow="horizontal" onClick={() => {this.props.onBack}}>
+          <Item arrow="horizontal" onClick={() => {this.props.onBack}}>
             充值
           </Item>
-          <Item disabled arrow="horizontal" onClick={() => {}}>
+          <Item arrow="horizontal" onClick={() => {}}>
             余额
           </Item>
-          <Item disabled arrow="horizontal" onClick={() => {}}>
+          <Item arrow="horizontal" onClick={() => {}}>
             订单
           </Item>
-          <Item disabled arrow="horizontal" onClick={() => {}}>
+          <Item arrow="horizontal" onClick={() => {}}>
             修改信息
           </Item>
         </List>
