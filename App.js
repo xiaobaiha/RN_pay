@@ -1,16 +1,56 @@
 import React from 'react';
-import {Button} from 'antd-mobile-rn';
+import {SearchBar ,TabBar} from 'antd-mobile-rn';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedTab: 'redTab',
+    };
+  }
+
+  renderContent(pageText) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
+        <SearchBar placeholder="Search" showCancelButton />
+        <Text style={{ margin: 50 }}>{pageText}</Text>
+      </View>
+    );
+  }
+
+  onChangeTab(tabName) {
+    this.setState({
+      selectedTab: tabName,
+    });
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text>222Open up App.js to start working on your app!</Text>
-        <Button>antd button</Button>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+        <TabBar
+        unselectedTintColor="#949494"
+        tintColor="#33A3F4"
+        barTintColor="#ccc"
+      >
+      <TabBar.Item
+          icon={require('./busi.png')}
+          selectedIcon={require('./busi_sel.png')}
+          title='一键购物'
+          selected={this.state.selectedTab === 'yellowTab'}
+          onPress={() => this.onChangeTab('yellowTab')}
+        >
+          {this.renderContent('My Tab')}
+        </TabBar.Item>
+        <TabBar.Item
+          icon={require('./friend.png')}
+          selectedIcon={require('./friend_sel.png')}
+          title="管理"
+          selected={this.state.selectedTab === 'greenTab'}
+          onPress={() => this.onChangeTab('greenTab')}
+        >
+          {this.renderContent('Friend Tab')}
+        </TabBar.Item>
+        
+      </TabBar>
     );
   }
 }
