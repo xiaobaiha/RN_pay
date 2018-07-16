@@ -1,15 +1,14 @@
 import React from 'react';
 import {List} from 'antd-mobile-rn';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
 const Item = List.Item;
-const Brief = Item.Brief;
 export default class AKS extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <List renderHeader={() => '设置'}>
-          <Item disabled arrow="horizontal" onClick={() => {}}>
+          <Item disabled arrow="horizontal" onClick={() => {this.props.onBack}}>
             充值
           </Item>
           <Item disabled arrow="horizontal" onClick={() => {}}>

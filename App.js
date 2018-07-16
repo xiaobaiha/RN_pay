@@ -40,8 +40,16 @@ export default class App extends React.Component {
           selected={this.state.selectedTab === 'yellowTab'}
           onPress={() => this.onChangeTab('yellowTab')}
         >
-          {/* {this.renderContent('My Tab')} */}
           <AKS />
+        </TabBar.Item>
+        <TabBar.Item
+          icon={require('./src/styles/imgs/friend.png')}
+          selectedIcon={require('./src/styles/imgs/friend_sel.png')}
+          title='购物配置'
+          selected={this.state.selectedTab === 'blueTab'}
+          onPress={() => this.onChangeTab('blueTab')}
+        >
+          <Setting />
         </TabBar.Item>
         <TabBar.Item
           icon={require('./src/styles/imgs/friend.png')}
@@ -50,7 +58,6 @@ export default class App extends React.Component {
           selected={this.state.selectedTab === 'greenTab'}
           onPress={() => this.onChangeTab('greenTab')}
         >
-          {/* {this.renderContent('Friend Tab')} */}
           <Setting />
         </TabBar.Item>
         
