@@ -1,11 +1,20 @@
 import React from 'react';
-import {SearchBar ,TabBar} from 'antd-mobile-rn';
+import {Button} from 'antd-mobile-rn';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class AKS extends React.Component {
   render() {
     return (
-      <View><Text>AKS</Text></View>
+      <View style={styles.container}>
+        <View style={styles.btn_group}>
+          <Button style={styles.btn}>AKS</Button>
+          <Button style={styles.btn}>AKS</Button>
+        </View>
+        <View style={styles.btn_group}>
+          <Button style={styles.btn}>AKS</Button>
+          <Button style={styles.btn}>AKS</Button>
+        </View>
+      </View>
     );
   }
 }
@@ -13,8 +22,20 @@ export default class AKS extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
+  btn_group:{
+    // flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    width: 100
+  },
+  btn: {
+    marginBottom: 50,
+    width: 100,
+    height: 100,
+    borderRadius: 50
+  }
 });
