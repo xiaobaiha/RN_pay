@@ -46,7 +46,7 @@ export default class App extends React.Component {
         <TabBar.Item
           icon={require('./src/styles/imgs/friend.png')}
           selectedIcon={require('./src/styles/imgs/friend_sel.png')}
-          title="管理"
+          title="设置"
           selected={this.state.selectedTab === 'greenTab'}
           onPress={() => this.onChangeTab('greenTab')}
         >
