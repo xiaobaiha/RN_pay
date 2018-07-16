@@ -4,11 +4,15 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
 const Item = List.Item;
 export default class AKS extends React.Component {
+  constructor(props){
+    super(props);
+    console.log("cons props:", props.navigation);
+  }
   render() {
     return (
       <View style={styles.container}>
         <List renderHeader={() => '设置'}>
-          <Item arrow="horizontal" onClick={() => {this.props.onBack}}>
+          <Item arrow="horizontal" onClick={() => {console.log(this.props.navigation)}}>
             充值
           </Item>
           <Item arrow="horizontal" onClick={() => {}}>

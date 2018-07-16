@@ -7,7 +7,7 @@ export default class AKS extends React.Component {
   render() {
     const right = [
       {
-        text: 'delete',
+        text: '删除',
         onPress: () => console.log('delete'),
         style: { backgroundColor: 'red', color: 'white' },
       },
@@ -15,20 +15,24 @@ export default class AKS extends React.Component {
     return (
       <View style={styles.container}>
         <List renderHeader={() => '一键购物配置'}>
-        <SwipeAction
-            autoClose
-            style={{ backgroundColor: 'transparent' }}
-            left={right}
-            onOpen={() => console.log('open')}
-            onClose={() => console.log('close')}
-          >
-          <Item disabled arrow="horizontal" onClick={() => {this.props.onBack}}>
-            购纸
-          </Item>
+          <SwipeAction
+              autoClose
+              style={{ backgroundColor: 'transparent' }}
+              left={right}
+            >
+            <Item arrow="horizontal" onClick={this.props.onBack}>
+              购纸
+            </Item>
           </SwipeAction>
-          <Item disabled arrow="horizontal" onClick={() => {}}>
-            购油
-          </Item>
+          <SwipeAction
+              autoClose
+              style={{ backgroundColor: 'transparent' }}
+              left={right}
+            >
+            <Item arrow="horizontal" onClick={() => {}}>
+              购油
+            </Item>
+          </SwipeAction>
         </List>
       </View>
     );
