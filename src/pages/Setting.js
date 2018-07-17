@@ -28,7 +28,6 @@ export default class AKS extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 25
+    flex: 1
   },
 });
