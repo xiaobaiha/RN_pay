@@ -4,10 +4,6 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
 const Item = List.Item;
 export default class AKS extends React.Component {
-  constructor(props){
-    super(props);
-    console.log("cons props:", props.navigation);
-  }
   render() {
     return (
       <View style={styles.container}>
