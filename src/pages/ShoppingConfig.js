@@ -20,7 +20,7 @@ export default class AKS extends React.Component {
               style={{ backgroundColor: 'transparent' }}
               left={right}
             >
-            <Item arrow="horizontal" onClick={this.props.onBack}>
+            <Item arrow="horizontal" onClick={()=>{}}>
               购纸
             </Item>
           </SwipeAction>
