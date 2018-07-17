@@ -12,7 +12,7 @@ export default class AKS extends React.Component {
     return (
       <View style={styles.container}>
         <List renderHeader={() => '设置'}>
-          <Item arrow="horizontal" onClick={() => {console.log(this.props.navigation)}}>
+          <Item arrow="horizontal" onClick={() => this.props.navigation.navigate('Details')}>
             充值
           </Item>
           <Item arrow="horizontal" onClick={() => {}}>

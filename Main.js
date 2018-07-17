@@ -62,7 +62,7 @@ export default class App extends React.Component {
           selected={this.state.selectedTab === 'greenTab'}
           onPress={() => this.onChangeTab('greenTab')}
         >
-          <Setting />
+          <Setting  navigation={this.props.navigation}/>
         </TabBar.Item>
         
       </TabBar>
