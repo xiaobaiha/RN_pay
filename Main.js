@@ -6,9 +6,6 @@ import Setting from './src/pages/Setting';
 import ShoppingConfig from './src/pages/ShoppingConfig';
 
 export default class App extends React.Component {
-  static navigationOptions = {
-    title: 'WeShop',
-  };
   constructor(props) {
     super(props);
     this.state = {

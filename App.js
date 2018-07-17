@@ -6,6 +6,9 @@ import { Button, View, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 
 class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'WeShop',
+  };
   render() {
     return (
       <MainScreen navigation={this.props.navigation}/>
@@ -23,7 +26,7 @@ class DetailsScreen extends React.Component {
 
 const RootStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Home: {screen: HomeScreen},
     Details: DetailsScreen,
   },
   {
