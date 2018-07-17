@@ -1,41 +1,41 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { List, Radio, WhiteSpace } from 'antd-mobile-rn';
+import { Button, Radio, List, Grid } from 'antd-mobile-rn';
 const RadioItem = Radio.RadioItem;
 
 export default class Pay extends React.Component {
-  state = {
-    part1Value: 1,
-    part2Value: 1,
-  };
   render() {
     return (
-      <View>
-        <List style={{ marginTop: 12 }}>
-          <Text style={{ marginTop: 12 }}>
-            充值金额
+      <View style={styles.container}>
+        <View style={styles.btn_group}>
+          <Button style={styles.btn}>10元</Button>
+          <Button type='ghost' style={styles.btn}>50元</Button>
+          <Button style={styles.btn}>100元</Button>
+        </View>
+        <View style={styles.btn_group}>
+          <Button style={styles.btn}>100元</Button>
+          <Button style={styles.btn}>200元</Button>
+          <Button style={styles.btn}>500元</Button>
+        </View>
+        <List style={{ width: 400, height: 400 }}>
+          <Text style={{ marginTop: 12, marginLeft: 12 }}>
+            充值方式
           </Text>
           <RadioItem
-            checked={this.state.part2Value === 1}
-            onChange={(event) => {
-              if (event.target.checked) {
-                this.setState({ part2Value: 1 });
-              }
-            }}
+           icon={require('../../src/styles/imgs/busi.png')}
+            checked={true}
           >
-            10元
+            <Grid data={[{
+                icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
+                text: `name`,
+              }]} 
+              />
+              {/* <Text>支付宝</Text> */}
           </RadioItem>
-          <RadioItem
-            checked={this.state.part2Value === 2}
-            onChange={(event) => {
-              if (event.target.checked) {
-                this.setState({ part2Value: 2 });
-              }
-            }}
-          >
-            50元
-          </RadioItem>
-        </List>
+          </List>
+        <View style={styles.btn_group}>
+          <Button type='primary'>充值</Button>
+        </View>
       </View>
     );
   }
@@ -44,8 +44,17 @@ export default class Pay extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  btn_group:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  btn: {
+    margin: 5,
+    width: 100,
+    height: 50,
+  }
 });
