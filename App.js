@@ -3,6 +3,7 @@ import Pay from './src/pages/Pay';
 import Orders from './src/pages/Orders';
 import Information from './src/pages/Information';
 import Remaining from './src/pages/Remaining';
+// import Test from './src/pages/test';
 import React from 'react';
 import { createStackNavigator } from 'react-navigation'; 
 
@@ -67,7 +68,7 @@ const RootStack = createStackNavigator(
     Pay: PayScreen,
     Information: InformationScreen,
     Orders: OrdersScreen,
-    Remaining: RemainingScreen
+    Remaining: RemainingScreen,
   },
   {
     initialRouteName: 'Home',

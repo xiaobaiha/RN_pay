@@ -21,10 +21,12 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@0x5e/react-native-alipay": "^0.2.4",
     "antd-mobile-rn": "^2.2.0",
     "expo": "^27.0.1",
     "react": "16.3.1",
     "react-native": "~0.55.2",
+    "react-native-yunpeng-alipay": "^2.0.0",
     "react-navigation": "^2.6.2"
   }
 }
