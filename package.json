@@ -27,6 +27,7 @@
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-native-yunpeng-alipay": "^2.0.0",
-    "react-navigation": "^2.6.2"
+    "react-navigation": "^2.6.2",
+    "rn-alipay": "^0.2.3"
   }
 }
