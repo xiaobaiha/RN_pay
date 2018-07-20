@@ -1,0 +1,1 @@
+export const preURL = "http://114.115.143.130:8080"
