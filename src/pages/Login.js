@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert, AsyncStorage } from 'react-native';
 import { Button, InputItem, List } from 'antd-mobile-rn';
 import axios from 'axios';
 import { preURL } from '../config/axiosConfig'
@@ -25,11 +25,20 @@ export default class Login extends React.Component {
       }
     }).then(response => {
       console.log(response)
-      if(response.status === 200){
+      //Alert.alert("标题", response.data.money)
+      if(response.data.Login_result === "ok"){
+        //储存登录用户数据到AsyncStorage，数组与int格式的数据存为json格式再储存
+        let Addresses = { "addresses" : response.data.addresses };
+        AsyncStorage.setItem('addresses', JSON.stringify(Addresses));
+        let Id = { "id" : response.data.id };
+        AsyncStorage.setItem('id', JSON.stringify(Id));
+        AsyncStorage.setItem('tel', response.data.tel);
+        AsyncStorage.setItem('username', response.data.username);
+        //AsyncStorage.setItem("money",response.data.money);
         this.props.navigation.navigate('Home');
       }
-      else if(response.status === 1001){
-        
+      else{
+        Alert.alert("登录错误", response.data.Login_result);
       }
     })
   }

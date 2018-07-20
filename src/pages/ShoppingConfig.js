@@ -1,6 +1,8 @@
 import React from 'react';
-import {List, SwipeAction, Button } from 'antd-mobile-rn';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import {List, SwipeAction, Button} from 'antd-mobile-rn';
+import { StyleSheet, Text, View, TouchableHighlight, AsyncStorage} from 'react-native';
+import axios from 'axios';
+import { preURL } from '../config/axiosConfig';
 
 const Item = List.Item;
 export default class ShoppingConfig extends React.Component {
@@ -16,9 +18,32 @@ export default class ShoppingConfig extends React.Component {
   componentWillMount(){
     this.loadConfig();
   }
-  loadConfig = () => {
+  loadConfig = async () => {
     // axios 获取用户一键购物设置
+    let UserId = await AsyncStorage.getItem('id');
+    UserId = JSON.parse(UserId).id;
+    //alert(UserId);
+    axios({
+      method: "GET",
+      url: preURL + "/shop-setting?userId=" + UserId,
+    }).then(response => {
+      //alert(response.data)
+      let productList = { "productList" : response.data};
+      AsyncStorage.setItem('productList', JSON.stringify(productList));
+      for(i in response.data){
+        //alert(response.data[i].id);
+        let newProduct = {
+          "name" : "hahaha" + i/*product.name*/,
+          "key": response.data[i].id,
+        };
+        this.setState({
+          configList: [...this.state.configList, newProduct]
+        });
+      }
+
+    })
   }
+
   render() {
     const right = [
       {

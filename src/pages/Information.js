@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import { Button, InputItem, List } from 'antd-mobile-rn';
 import Item from '../../node_modules/antd-mobile-rn/lib/list/ListItem.native';
 
@@ -11,7 +11,16 @@ export default class Information extends React.Component {
     phone: '12312312222',
   }
   componentWillMount(){
-    // axios 获取用户信息
+    // AsyncStorage 获取用户信息
+    this.getInfo();
+  }
+  async getInfo(){
+    let Name = await AsyncStorage.getItem('username');
+    this.setState({ name : Name });
+    let Address = await AsyncStorage.getItem('addresses');
+    this.setState({ address : JSON.parse(Address).addresses });
+    let Phone = await AsyncStorage.getItem('tel');
+    this.setState({ phone : Phone });
   }
   toggleChangeState = () => {
     let {changeDisabled} = this.state;
@@ -19,6 +28,7 @@ export default class Information extends React.Component {
       this.setState({changeDisabled: !changeDisabled})
     } else {
       // axios 修改用户信息
+      
     }
   }
   addAddress = () => {

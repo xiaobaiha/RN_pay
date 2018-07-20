@@ -1,14 +1,36 @@
 import React from 'react';
-import {View,Text,StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 import { Button, InputItem } from 'antd-mobile-rn';
+import axios from 'axios';
+import { preURL } from '../config/axiosConfig';
 
 
 export default class Signup extends React.Component {
   state = {
-    remains: 0
+    name: '',
+    password: ''
   }
   handleSignup = () => {
     // axios handle signup
+    axios({
+      method: "POST",
+      url: preURL + "/Register",
+      dataType: "json",
+      data: {
+        user_name: this.state.name,
+        user_password: this.state.password,
+      },
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8"
+      }
+    }).then(response => {
+      if(response.data.Register_result === "ok"){
+        Alert.alert("提示", "注册成功");
+      }
+      else {
+        Alert.alert("注册错误", response.data.Register_result);
+      }
+    })
   }
   render() {
     return (
