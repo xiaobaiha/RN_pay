@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, SwipeAction } from 'antd-mobile-rn';
+import {List, SwipeAction, Button } from 'antd-mobile-rn';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
 const Item = List.Item;
@@ -34,6 +34,7 @@ export default class AKS extends React.Component {
             </Item>
           </SwipeAction>
         </List>
+        <Button onClick={() => this.props.navigation.navigate('AddConfig')} type='primary'>新增</Button>
       </View>
     );
   }

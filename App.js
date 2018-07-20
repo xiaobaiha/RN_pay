@@ -66,7 +66,7 @@ import Pay from './src/pages/Pay';
 import Orders from './src/pages/Orders';
 import Information from './src/pages/Information';
 import Remaining from './src/pages/Remaining';
-// import Test from './src/pages/test';
+import AddConfig from './src/pages/AddConfig';
 import React from 'react';
 import { createStackNavigator } from 'react-navigation'; 
 
@@ -88,6 +88,17 @@ class PayScreen extends React.Component {
   render() {
     return (
       <Pay />
+    );
+  }
+}
+
+class AddConfigScreen extends React.Component {
+  static navigationOptions = {
+    title: '新增购物配置',
+  };
+  render() {
+    return (
+      <AddConfig />
     );
   }
 }
@@ -132,6 +143,7 @@ const RootStack = createStackNavigator(
     Information: InformationScreen,
     Orders: OrdersScreen,
     Remaining: RemainingScreen,
+    AddConfig: AddConfigScreen
   },
   {
     initialRouteName: 'Home',

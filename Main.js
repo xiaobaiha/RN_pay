@@ -50,7 +50,7 @@ export default class App extends React.Component {
           selected={this.state.selectedTab === 'blueTab'}
           onPress={() => this.onChangeTab('blueTab')}
         >
-          <ShoppingConfig />
+          <ShoppingConfig navigation={this.props.navigation}/>
         </TabBar.Item>
         <TabBar.Item
           icon={require('./src/styles/imgs/friend.png')}
@@ -59,7 +59,7 @@ export default class App extends React.Component {
           selected={this.state.selectedTab === 'greenTab'}
           onPress={() => this.onChangeTab('greenTab')}
         >
-          <Setting  navigation={this.props.navigation}/>
+          <Setting navigation={this.props.navigation}/>
         </TabBar.Item>
         
       </TabBar>
