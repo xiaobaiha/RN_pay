@@ -1,18 +1,45 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button, InputItem, List } from 'antd-mobile-rn';
 
 export default class Login extends React.Component {
   state = {
-    remains: 0
+    name: '',
+    password: ''
   }
-  componentWillMount() {
-    // axios 获取余额
+  handleLogin() {
+    // axios 请求登录
   }
   render() {
-    const {remains} = this.state;
     return (
-      <View style={styles.container}>
-        <Text>您可用余额为{remains}元。</Text>
+      <View>
+        <InputItem
+            clear
+            onErrorPress={() => alert('clicked me')}
+            value={this.state.value}
+            onChange={(value) => {
+              this.setState({
+                name: value,
+              });
+            }}
+            placeholder="用户名"
+          >
+            用户名
+          </InputItem>
+          <InputItem
+            clear
+            onErrorPress={() => alert('clicked me')}
+            value={this.state.value}
+            onChange={(value) => {
+              this.setState({
+                password: value,
+              });
+            }}
+            placeholder="密码"
+          >
+            密码
+          </InputItem>
+          <Button type='primary' onClick={this.handleLogin}>登录</Button>
       </View>
     );
   }
