@@ -15,8 +15,11 @@ export default class Pay extends React.Component {
   }
   toggleChangeState = () => {
     let {changeDisabled} = this.state;
-    // alert(changeDisabled);
-    this.setState({changeDisabled: !changeDisabled})
+    if(changeDisabled){
+      this.setState({changeDisabled: !changeDisabled})
+    } else {
+      // axios 修改用户信息
+    }
   }
   addAddress = () => {
     this.props.navigation.navigate('AddAddress')
