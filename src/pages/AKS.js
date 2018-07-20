@@ -5,32 +5,6 @@ import axios from 'axios';
 export default class AKS extends React.Component {
   handleClick = () => {
     console.log("enter handleclick");
-    // axios({
-    //   method: 'post',
-    //   url: 'http://10.180.89.154:5007/test',
-    //   data: {
-    //     firstName: 'Fred',
-    //     lastName: 'Flintstone'
-    //   },
-    //   headers:{
-    //     "Accept": "application/json",
-    //     "Content-Type": 'application/json',   
-    //     "Connection": "close",   
-    //     "type": "getUserData",  
-    //   }
-    // }).then(response => {
-    //   console.log(response);
-    // }).catch(err=>{console.log(err)});
-    // axios.post('http://192.168.43.114:5007/test', {
-    //   firstName: 'Fred',
-    //   lastName: 'Flintstone'
-    // })
-    // .then(function (response) {
-    //   console.log(response); 
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
   }
   render() {
     return (

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button, InputItem, List } from 'antd-mobile-rn';
 import Item from '../../node_modules/antd-mobile-rn/lib/list/ListItem.native';
 
-export default class Pay extends React.Component {
+export default class Information extends React.Component {
   state = {
     changeDisabled: true,
     name: 'llx',

@@ -3,7 +3,7 @@ import {List, SwipeAction, Button } from 'antd-mobile-rn';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
 const Item = List.Item;
-export default class AKS extends React.Component {
+export default class ShoppingConfig extends React.Component {
   state = {
     configList: [{
       name: '购纸',
@@ -17,7 +17,7 @@ export default class AKS extends React.Component {
     this.loadConfig();
   }
   loadConfig = () => {
-    // axios load user config
+    // axios 获取用户一键购物设置
   }
   render() {
     const right = [

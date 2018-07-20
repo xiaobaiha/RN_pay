@@ -16,10 +16,11 @@ export default class AddConfig extends React.Component {
       method: "GET",
       url: preURL + "/items"
     }).then(response => {
-        console.log(response)
-        alert(response.data)
-        //this.setState({ remains: response.data })
-      })
+      console.log(response)
+      alert(JSON.stringify(response.data))
+      this.setState({ productList: response.data })
+    });
+    // asyncstorage 获取地址
   }
   render() {
     const { remains } = this.state;
