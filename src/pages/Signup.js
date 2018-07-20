@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {View,Text,StyleSheet} from 'react-native';
+import { Button, InputItem } from 'antd-mobile-rn';
+
 
 export default class Signup extends React.Component {
   state = {
@@ -9,10 +11,20 @@ export default class Signup extends React.Component {
     // axios 获取余额
   }
   render() {
-    const {remains} = this.state;
     return (
       <View style={styles.container}>
-        <Text>您可用余额为{remains}元。</Text>
+        <View>
+          <Text>用户名</Text>
+
+        </View>
+        <View>
+          <Text>密码</Text>
+
+        </View>
+        <View>
+          <Text>重复密码</Text>
+
+        </View>
       </View>
     );
   }

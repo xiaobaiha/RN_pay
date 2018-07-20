@@ -5,6 +5,8 @@ import Information from './src/pages/Information';
 import Remaining from './src/pages/Remaining';
 import AddConfig from './src/pages/AddConfig';
 import Page from './src/pages/PageTest';
+import Login from './src/pages/Login';
+import Signup from './src/pages/Signup';
 import React from 'react';
 import { createStackNavigator } from 'react-navigation'; 
 
@@ -24,9 +26,25 @@ class PayScreen extends React.Component {
     title: '充值',
   };
   render() {
-    return (
-      <Pay />
-    );
+    return (<Pay />);
+  }
+}
+
+class LoginScreen extends React.Component {
+  static navigationOptions = {
+    title: '登录',
+  };
+  render() {
+    return (<Login />);
+  }
+}
+
+class SignupScreen extends React.Component {
+  static navigationOptions = {
+    title: '注册',
+  };
+  render() {
+    return (<Signup />);
   }
 }
 
@@ -93,11 +111,13 @@ const RootStack = createStackNavigator(
     Orders: OrdersScreen,
     Remaining: RemainingScreen,
     AddConfig: AddConfigScreen,
-    Page: PageScreen
+    Page: PageScreen,
+    Login: LoginScreen,
+    Signup: SignupScreen
   },
   {
-    initialRouteName: 'Home',
-    // initialRouteName: 'Page',
+    // initialRouteName: 'Home',
+    initialRouteName: 'Login',
   }
 );
 

@@ -1,9 +1,12 @@
 import React from 'react';
-import {List} from 'antd-mobile-rn';
+import {List, Button} from 'antd-mobile-rn';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
 const Item = List.Item;
 export default class AKS extends React.Component {
+  logout = () => {
+    this.props.navigation.navigate('Login')
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -20,6 +23,7 @@ export default class AKS extends React.Component {
           <Item arrow="horizontal" onClick={() => this.props.navigation.navigate('Information')}>
             修改信息
           </Item>
+          <Button type='warning' onClick={this.logout}>注销</Button>
         </List>
       </View>
     );
