@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import axios from 'axios';
 import { preURL } from '../config/axiosConfig';
 import {List, Modal, Button, Radio, InputItem} from 'antd-mobile-rn';
@@ -26,10 +26,16 @@ export default class AddConfig extends React.Component {
       url: preURL + "/items"
     }).then(response => {
       console.log(response)
-      alert(JSON.stringify(response.data))
+      //alert(JSON.stringify(response.data))
       this.setState({ productList: response.data })
     });
     // asyncstorage 获取地址
+    this.getArray()
+  }
+  async getArray(){
+    let Address = await AsyncStorage.getItem('addresses');
+    this.setState({ address : JSON.parse(Address).addresses });
+    //alert(this.state.address);
   }
   handleAddConfig = () => {
     // axios 增加购物配置

@@ -138,8 +138,13 @@ const RootStack = createStackNavigator(
     AddAddress: AddAddressScreen
   },
   {
+<<<<<<< HEAD
     initialRouteName: 'Home',
     // initialRouteName: 'AddConfig',
+=======
+    //initialRouteName: 'Home',
+    initialRouteName: 'Login',
+>>>>>>> d9cec37ce2c4c0411d0be94700111af6851506c5
     // initialRouteName: 'Page',
   }
 );
