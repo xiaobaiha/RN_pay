@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import axios from 'axios';
+import { preURL } from '../config/axiosConfig'
 
 export default class AddConfig extends React.Component {
   state = {
@@ -10,10 +12,17 @@ export default class AddConfig extends React.Component {
   }
   componentWillMount() {
     // axios 获取商品列表
-    // axios 获取地址列表
+    axios({
+      method: "GET",
+      url: preURL + "/items"
+    }).then(response => {
+        console.log(response)
+        alert(response.data)
+        //this.setState({ remains: response.data })
+      })
   }
   render() {
-    const {remains} = this.state;
+    const { remains } = this.state;
     return (
       <View style={styles.container}>
         <Text>您可用余额为{remains}元。</Text>

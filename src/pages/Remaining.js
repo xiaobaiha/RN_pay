@@ -12,14 +12,14 @@ export default class Pay extends React.Component {
     axios({
       method: "GET",
       url: preURL + "/balance?userId=1",
-  }).then(response => {
+    }).then(response => {
       console.log(response)
       //alert(response.data)
-      this.setState({remains: response.data})
-  })
+      this.setState({ remains: response.data })
+    })
   }
   render() {
-    const {remains} = this.state;
+    const { remains } = this.state;
     return (
       <View style={styles.container}>
         <Text>您可用余额为{remains}元。</Text>
