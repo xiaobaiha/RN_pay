@@ -21,16 +21,16 @@ export default class AKS extends React.Component {
     // }).then(response => {
     //   console.log(response);
     // }).catch(err=>{console.log(err)});
-    axios.post('http://192.168.43.114:5007/test', {
-      firstName: 'Fred',
-      lastName: 'Flintstone'
-    })
-    .then(function (response) {
-      console.log(response); 
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    // axios.post('http://192.168.43.114:5007/test', {
+    //   firstName: 'Fred',
+    //   lastName: 'Flintstone'
+    // })
+    // .then(function (response) {
+    //   console.log(response); 
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
   }
   render() {
     return (
