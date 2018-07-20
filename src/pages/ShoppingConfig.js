@@ -4,6 +4,21 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
 const Item = List.Item;
 export default class AKS extends React.Component {
+  state = {
+    configList: [{
+      name: '购纸',
+      key: '1'
+    }, {
+      name: '购油',
+      key: '2'
+    }]
+  }
+  componentWillMount(){
+    this.loadConfig();
+  }
+  loadConfig = () => {
+    // axios load user config
+  }
   render() {
     const right = [
       {
@@ -12,27 +27,23 @@ export default class AKS extends React.Component {
         style: { backgroundColor: 'red', color: 'white' },
       },
     ];
+    const {configList} = this.state;
+
     return (
       <View style={styles.container}>
         <List renderHeader={() => '一键购物配置'}>
-          <SwipeAction
+          {configList.map(item => {
+            return (<SwipeAction
               autoClose
               style={{ backgroundColor: 'transparent' }}
               left={right}
+              key={item.key}
             >
             <Item arrow="horizontal" onClick={()=>{}}>
-              购纸
+              {item.name}
             </Item>
-          </SwipeAction>
-          <SwipeAction
-              autoClose
-              style={{ backgroundColor: 'transparent' }}
-              left={right}
-            >
-            <Item arrow="horizontal" onClick={() => {}}>
-              购油
-            </Item>
-          </SwipeAction>
+          </SwipeAction>);
+          })}
         </List>
         <Button onClick={() => this.props.navigation.navigate('AddConfig')} type='primary'>新增</Button>
       </View>

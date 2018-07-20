@@ -67,6 +67,7 @@ import Orders from './src/pages/Orders';
 import Information from './src/pages/Information';
 import Remaining from './src/pages/Remaining';
 import AddConfig from './src/pages/AddConfig';
+import Page from './src/pages/PageTest';
 import React from 'react';
 import { createStackNavigator } from 'react-navigation'; 
 
@@ -88,6 +89,17 @@ class PayScreen extends React.Component {
   render() {
     return (
       <Pay />
+    );
+  }
+}
+
+class PageScreen extends React.Component {
+  static navigationOptions = {
+    title: 'demo',
+  };
+  render() {
+    return (
+      <Page />
     );
   }
 }
@@ -143,10 +155,12 @@ const RootStack = createStackNavigator(
     Information: InformationScreen,
     Orders: OrdersScreen,
     Remaining: RemainingScreen,
-    AddConfig: AddConfigScreen
+    AddConfig: AddConfigScreen,
+    Page: PageScreen
   },
   {
     initialRouteName: 'Home',
+    // initialRouteName: 'Page',
   }
 );
 
