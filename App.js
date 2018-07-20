@@ -26,7 +26,7 @@ class PayScreen extends React.Component {
     title: '充值',
   };
   render() {
-    return (<Pay />);
+    return (<Pay navigation={this.props.navigation}/>);
   }
 }
 
@@ -35,7 +35,7 @@ class LoginScreen extends React.Component {
     title: '登录',
   };
   render() {
-    return (<Login />);
+    return (<Login navigation={this.props.navigation} />);
   }
 }
 

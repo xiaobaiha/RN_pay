@@ -1,54 +1,63 @@
 import React from 'react';
-import {View,Text,StyleSheet} from 'react-native';
-import { Button, InputItem } from 'antd-mobile-rn';
+import { StyleSheet, Text, View } from 'react-native';
+import axios from 'axios';
+import { preURL } from '../config/axiosConfig'
 
-
-export default class Signup extends React.Component {
+export default class ChangePassword extends React.Component {
   state = {
-    remains: 0
+    currentStep: 0,
   }
-  handleSignup = () => {
-    // axios handle signup
+  componentWillMount() {
+    // axios 修改密码
   }
   render() {
+    const { currentStep } = this.state;
     return (
       <View>
-        <InputItem
-            onErrorPress={() => alert('clicked me')}
-            onChange={(value) => {
-              this.setState({
-                name: value,
-              });
-            }}
-            placeholder="用户名"
-          >
-            用户名
-          </InputItem>
+        {currentStep === 0? 
+        <View>
           <InputItem
+            clear
             onErrorPress={() => alert('clicked me')}
+            value={this.state.value}
             onChange={(value) => {
               this.setState({
                 password: value,
               });
             }}
-            type='password'
             placeholder="密码"
           >
-            密码
+            请输入当前密码
           </InputItem>
+        </View>:
+        <View>
           <InputItem
             onErrorPress={() => alert('clicked me')}
+            value={this.state.value}
             onChange={(value) => {
               this.setState({
                 password: value,
               });
             }}
-            type='password'
-            placeholder="请再输入一遍密码"
+            placeholder="新密码"
           >
-            重复密码
+            新密码
           </InputItem>
-          <Button type='primary' onClick={this.handleSignup}>注册</Button>
+          <InputItem
+            onErrorPress={() => alert('clicked me')}
+            value={this.state.value}
+            onChange={(value) => {
+              this.setState({
+                password: value,
+              });
+            }}
+            placeholder="新密码"
+          >
+            请再输入一遍
+          </InputItem>
+          <Button>修改密码</Button>
+        </View>
+        }
       </View>
     );
   }

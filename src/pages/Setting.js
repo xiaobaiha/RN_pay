@@ -23,6 +23,9 @@ export default class AKS extends React.Component {
           <Item arrow="horizontal" onClick={() => this.props.navigation.navigate('Information')}>
             修改信息
           </Item>
+          <Item arrow="horizontal" onClick={() => this.props.navigation.navigate('ChangePassword')}>
+            修改密码
+          </Item>
           <Button type='warning' onClick={this.logout}>注销</Button>
         </List>
       </View>
