@@ -7,6 +7,7 @@ import AddConfig from './src/pages/AddConfig';
 import Page from './src/pages/PageTest';
 import Login from './src/pages/Login';
 import Signup from './src/pages/Signup';
+import ChangePassword from './src/pages/ChangePassword';
 import React from 'react';
 import { createStackNavigator } from 'react-navigation'; 
 
@@ -45,6 +46,15 @@ class SignupScreen extends React.Component {
   };
   render() {
     return (<Signup />);
+  }
+}
+
+class ChangePasswordScreen extends React.Component {
+  static navigationOptions = {
+    title: '修改密码',
+  };
+  render() {
+    return (<ChangePassword navigation={this.props.navigation} />);
   }
 }
 
@@ -113,11 +123,13 @@ const RootStack = createStackNavigator(
     AddConfig: AddConfigScreen,
     Page: PageScreen,
     Login: LoginScreen,
-    Signup: SignupScreen
+    Signup: SignupScreen,
+    ChangePassword: ChangePasswordScreen
   },
   {
     // initialRouteName: 'Home',
-    initialRouteName: 'Login',
+    // initialRouteName: 'Login',
+    initialRouteName: 'ChangePassword',
   }
 );
 
