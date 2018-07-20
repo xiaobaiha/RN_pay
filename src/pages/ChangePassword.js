@@ -65,7 +65,6 @@ export default class ChangePassword extends React.Component {
             <Button onClick={this.handleChangePassword}>修改密码</Button>
           </View>);
         }
-    // );
   }
 }
 

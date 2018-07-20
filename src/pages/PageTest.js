@@ -1,208 +1,67 @@
-/* tslint:disable:jsx-no-multiline-js */
 import React from 'react';
-import { ScrollView, Text } from 'react-native';
-import { Button, InputItem, List } from 'antd-mobile-rn';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { List, Picker } from 'antd-mobile-rn';
 
-export default class BasicInputItemExample extends React.Component {
-  inputRef;
+import { district } from 'antd-mobile-demo-data';
 
+const CustomChildren = (props) => (
+  <TouchableOpacity onPress={props.onClick}>
+    <View
+      style={{ height: 36, paddingLeft: 15, flexDirection: 'row', alignItems: 'center' }}
+    >
+      <Text style={{ flex: 1 }}>{props.children}</Text>
+      <Text style={{ textAlign: 'right', color: '#888', marginRight: 15 }}>{props.extra}</Text>
+    </View>
+  </TouchableOpacity>
+);
+
+export default class PopupExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      value1: '',
-      value2: '',
-      value3: '',
-      value4: '',
-      labelnum1: '',
-      labelnum2: '',
-      labelnum3: '',
-      text: '',
-      bankCard: '',
-      phone: '',
-      password: '',
-      number: '',
+      data: [],
+      value: [],
+      pickerValue: [],
     };
   }
-
+  onClick = () => {
+    // console.log('start loading data');
+    setTimeout(() => {
+      this.setState({
+        data: district,
+      });
+    }, 500);
+  }
+  onChange = (value) => {
+    // console.log(value);
+    this.setState({ value });
+  }
   render() {
     return (
-      <ScrollView
-        style={{ flex: 1 }}
-        automaticallyAdjustContentInsets={false}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-      >
-        <List renderHeader={() => '基本'}>
-          <InputItem
-            clear
-            error
-            onErrorPress={() => alert('clicked me')}
+      <View style={{ marginTop: 30 }}>
+        <List>
+          <Picker
+            data={this.state.data}
+            cols={3}
             value={this.state.value}
-            onChange={(value) => {
-              this.setState({
-                value,
-              });
-            }}
-            extra="元"
-            placeholder="有标签"
+            onChange={this.onChange}
           >
-            输入框
-          </InputItem>
-          <InputItem
-            clear
-            onErrorPress={() => {
-              alert(1);
-            }}
-            value="不可编辑"
-            onChange={(value) => {
-              this.setState({
-                value,
-              });
-            }}
-            extra={<Text>元</Text>}
-            placeholder="不可编辑"
-            editable={false}
+            <List.Item arrow="horizontal" last onClick={this.onClick}>
+              省市选择(异步加载)
+            </List.Item>
+          </Picker>
+          <Picker
+            title="选择地区"
+            data={district}
+            cols={2}
+            value={this.state.pickerValue}
+            onChange={(v) => this.setState({ pickerValue: v })}
+            onOk={(v) => this.setState({ pickerValue: v })}
           >
-            输入框
-          </InputItem>
-          <InputItem
-            clear
-            value={this.state.value1}
-            onChange={(value) => {
-              this.setState({
-                value1: value,
-              });
-            }}
-            placeholder="无标签"
-          />
-          <InputItem
-            clear
-            placeholder="点击下方按钮该输入框会获取光标"
-            ref={(el) => (this.inputRef = el)}
-          >
-            标题
-          </InputItem>
-          <List.Item>
-            <Button
-              onClick={() => {
-                this.inputRef.focus();
-              }}
-              type="primary"
-            >
-              点击获取光标
-            </Button>
-          </List.Item>
+            <CustomChildren>Customized children</CustomChildren>
+          </Picker>
         </List>
-        <List renderHeader={() => '固定标签字数'}>
-          <InputItem
-            clear
-            value={this.state.labelnum1}
-            onChange={(value) => {
-              this.setState({
-                labelnum1: value,
-              });
-            }}
-            labelNumber={2}
-            placeholder="两个字标签"
-          >
-            姓名
-          </InputItem>
-          <InputItem
-            clear
-            value={this.state.labelnum2}
-            onChange={(value) => {
-              this.setState({
-                labelnum2: value,
-              });
-            }}
-            labelNumber={3}
-            placeholder="三个字标签"
-          >
-            校验码
-          </InputItem>
-          <InputItem
-            clear
-            value={this.state.labelnum3}
-            onChange={(value) => {
-              this.setState({
-                labelnum3: value,
-              });
-            }}
-            labelNumber={4}
-            placeholder="四个字标签（默认）"
-          >
-            四字标签
-          </InputItem>
-        </List>
-        <List renderHeader={() => '格式'}>
-          <InputItem
-            clear
-            error
-            value={this.state.text}
-            onChange={(value) => {
-              this.setState({
-                text: value,
-              });
-            }}
-            placeholder="text"
-          >
-            文本输入
-          </InputItem>
-          <InputItem
-            clear
-            type="bankCard"
-            value={this.state.bankcard}
-            onChange={(value) => {
-              this.setState({
-                bankcard: value,
-              });
-            }}
-            placeholder="bankCard"
-          >
-            银行卡
-          </InputItem>
-          <InputItem
-            clear
-            type="phone"
-            value={this.state.phone}
-            onChange={(value) => {
-              this.setState({
-                phone: value,
-              });
-            }}
-            placeholder="phone"
-          >
-            手机号
-          </InputItem>
-          <InputItem
-            clear
-            type="password"
-            value={this.state.password}
-            onChange={(value) => {
-              this.setState({
-                password: value,
-              });
-            }}
-            placeholder="password"
-          >
-            密码
-          </InputItem>
-          <InputItem
-            clear
-            type="number"
-            value={this.state.number}
-            onChange={(value) => {
-              this.setState({
-                number: value,
-              });
-            }}
-            placeholder="number"
-          >
-            数字
-          </InputItem>
-        </List>
-      </ScrollView>
+      </View>
     );
   }
 }

@@ -128,8 +128,8 @@ const RootStack = createStackNavigator(
   },
   {
     // initialRouteName: 'Home',
-    initialRouteName: 'Login',
-    // initialRouteName: 'ChangePassword',
+    // initialRouteName: 'Login',
+    initialRouteName: 'Page',
   }
 );
 
