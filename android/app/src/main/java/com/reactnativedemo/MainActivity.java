@@ -1,6 +1,7 @@
 package com.reactnativedemo;
 
 import com.facebook.react.ReactActivity;
+// import com.yunpeng.alipay.AlipayPackage;
 
 public class MainActivity extends ReactActivity {
 

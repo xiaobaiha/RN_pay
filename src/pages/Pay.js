@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button, Radio, List, Grid } from 'antd-mobile-rn';
-// import Alipay from 'react-native-yunpeng-alipay';
-import Alipay from '../util/Alipay';
+import Alipay from 'react-native-yunpeng-alipay';
+// import Alipay from '../util/Alipay';
 const RadioItem = Radio.RadioItem;
 
 export default class Pay extends React.Component {
@@ -31,13 +31,11 @@ export default class Pay extends React.Component {
     // }, (e) => {
     //   console.log(e);
     // });
-    let res = await call(getOrderInfo, params); // 从后端获取签名字串，参考支付接口调用
-    let ret = await call(Alipay.pay, res.data); // 调起支付宝，发起支付
-    if (ret.resultStatus === '9000') {
-      // 支付成功回调
-    } else {
-      // 支付失败回调
-    }
+    Alipay.pay("alipay_sdk=alipay-sdk-java-3.3.4.ALL&app_id=2016091900545639&biz_content=%7B%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22out_trade_no%22%3A%2211111%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22subject%22%3A%22App%E6%94%AF%E4%BB%98%E6%B5%8B%E8%AF%95Java%22%2C%22timeout_express%22%3A%2230m%22%2C%22total_amount%22%3A%220.01%22%7D&charset=utf-8&format=json&method=alipay.trade.app.pay&notify_url=%E5%95%86%E6%88%B7%E5%A4%96%E7%BD%91%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE%E7%9A%84%E5%BC%82%E6%AD%A5%E5%9C%B0%E5%9D%80&sign=MYiAP%2Bp5npUgOQ8iK2xk4rlsWtYRJUd4090WuTrt26IMNm4ZP%2BTvvu2nPd26npHk7VGmCKAITg7Dm2%2F9JpchcQXFKXsAFpC6McQcrMdrBw34NaW4VJx8Lfp%2FlE5zs0NhJMGCMCrkgHDgvKboSwyi%2B7tvv%2Fl94%2BnF06RyOzvgJdDlejGdgsQYZRwWsPN4aBF2dZlTF7OEfYDaW4M7XeeYVqFHHspObv8A25Rua87l9axkjvPaXIWh8VOf4SqgzgO7oq8ZVPenfFMLXFtAS340KiUx7rfugnT2JE8U2RTriP19O9orG9GHypA2ux0Zj90pwT%2FBI%2Fu%2FqjDdBVNMecMDFg%3D%3D&sign_type=RSA2&timestamp=2018-07-20+09%3A48%3A02&version=1.0").then(function(data){
+      console.log(data);
+    }, function (err) {
+        console.log(err);
+    });
   }
 
   handlePay = ()=>{
