@@ -1,65 +1,71 @@
+/* tslint:disable:jsx-no-multiline-js */
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { List, Picker } from 'antd-mobile-rn';
+import { Text, View } from 'react-native';
+import { List, Radio, WhiteSpace } from 'antd-mobile-rn';
+const RadioItem = Radio.RadioItem;
 
-import { district } from 'antd-mobile-demo-data';
+export default class BasicRadioExample extends React.Component {
+  state = {
+    part1Value: 1,
+    part2Value: 1,
+  };
 
-const CustomChildren = (props) => (
-  <TouchableOpacity onPress={props.onClick}>
-    <View
-      style={{ height: 36, paddingLeft: 15, flexDirection: 'row', alignItems: 'center' }}
-    >
-      <Text style={{ flex: 1 }}>{props.children}</Text>
-      <Text style={{ textAlign: 'right', color: '#888', marginRight: 15 }}>{props.extra}</Text>
-    </View>
-  </TouchableOpacity>
-);
-
-export default class PopupExample extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      value: [],
-      pickerValue: [],
-    };
-  }
-  onClick = () => {
-    // console.log('start loading data');
-    setTimeout(() => {
-      this.setState({
-        data: district,
-      });
-    }, 500);
-  }
-  onChange = (value) => {
-    // console.log(value);
-    this.setState({ value });
-  }
   render() {
     return (
-      <View style={{ marginTop: 30 }}>
-        <List>
-          <Picker
-            data={this.state.data}
-            cols={3}
-            value={this.state.value}
-            onChange={this.onChange}
+      <View>
+        <View style={{ padding: 10 }}>
+          <Radio
+            checked={this.state.part1Value === 1}
+            onChange={(event) => {
+              if (event.target.checked) {
+                this.setState({ part1Value: 1 });
+              }
+            }}
+            style={{ borderWidth: 1, borderColor: '#999', margin: 10 }}
           >
-            <List.Item arrow="horizontal" last onClick={this.onClick}>
-              省市选择(异步加载)
-            </List.Item>
-          </Picker>
-          <Picker
-            title="选择地区"
-            data={district}
-            cols={2}
-            value={this.state.pickerValue}
-            onChange={(v) => this.setState({ pickerValue: v })}
-            onOk={(v) => this.setState({ pickerValue: v })}
+            Support
+          </Radio>
+          <WhiteSpace />
+          <Radio
+            checked={this.state.part1Value === 2}
+            onChange={(event) => {
+              if (event.target.checked) {
+                this.setState({ part1Value: 2 });
+              }
+            }}
+            style={{ borderWidth: 1, borderColor: '#999', margin: 10 }}
+          />
+          <WhiteSpace />
+        </View>
+
+        <List style={{ marginTop: 12 }}>
+          <Text style={{ marginTop: 12 }}>
+            Form radio, radio in general list.
+          </Text>
+          <RadioItem
+            checked={this.state.part2Value === 1}
+            onChange={(event) => {
+              if (event.target.checked) {
+                this.setState({ part2Value: 1 });
+              }
+            }}
           >
-            <CustomChildren>Customized children</CustomChildren>
-          </Picker>
+            Use Ant Desgin Component
+          </RadioItem>
+          <RadioItem
+            checked={this.state.part2Value === 2}
+            onChange={(event) => {
+              if (event.target.checked) {
+                this.setState({ part2Value: 2 });
+              }
+            }}
+          >
+            Use Ant Desgin Component
+          </RadioItem>
+          <RadioItem disabled>Set disabled</RadioItem>
+          <RadioItem disabled checked>
+            Set disabled
+          </RadioItem>
         </List>
       </View>
     );
