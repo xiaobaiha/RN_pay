@@ -19,7 +19,7 @@ export default class Pay extends React.Component {
     this.setState({changeDisabled: !changeDisabled})
   }
   addAddress = () => {
-    
+    this.props.navigation.navigate('AddAddress')
   }
   render() {
     let {name,phone,changeDisabled,address} = this.state;

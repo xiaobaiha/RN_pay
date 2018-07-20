@@ -1,3 +1,5 @@
+import React from 'react';
+import { createStackNavigator } from 'react-navigation'; 
 import MainScreen from './Main';
 import Pay from './src/pages/Pay';
 import Orders from './src/pages/Orders';
@@ -8,8 +10,7 @@ import Page from './src/pages/PageTest';
 import Login from './src/pages/Login';
 import Signup from './src/pages/Signup';
 import ChangePassword from './src/pages/ChangePassword';
-import React from 'react';
-import { createStackNavigator } from 'react-navigation'; 
+import AddAddress from './src/pages/AddAddress';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -58,6 +59,15 @@ class ChangePasswordScreen extends React.Component {
   }
 }
 
+class AddAddressScreen extends React.Component {
+  static navigationOptions = {
+    title: '修改密码',
+  };
+  render() {
+    return (<AddAddress navigation={this.props.navigation} />);
+  }
+}
+
 class PageScreen extends React.Component {
   static navigationOptions = {
     title: 'demo',
@@ -86,7 +96,7 @@ class InformationScreen extends React.Component {
   };
   render() {
     return (
-      <Information />
+      <Information navigation={this.props.navigation} />
     );
   }
 }
@@ -124,12 +134,13 @@ const RootStack = createStackNavigator(
     Page: PageScreen,
     Login: LoginScreen,
     Signup: SignupScreen,
-    ChangePassword: ChangePasswordScreen
+    ChangePassword: ChangePasswordScreen,
+    AddAddress: AddAddressScreen
   },
   {
-    // initialRouteName: 'Home',
+    initialRouteName: 'Home',
     // initialRouteName: 'Login',
-    initialRouteName: 'Page',
+    // initialRouteName: 'Page',
   }
 );
 
