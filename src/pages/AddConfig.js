@@ -43,9 +43,9 @@ export default class AddConfig extends React.Component {
     // 若存在 return true, 否则false
   }
   handleAddConfig = () => {
-    // if(this.configNameExist(this.state.configName)){
-      Modal.alert({title:'增加配置失败', message:'配置名称已存在'});
-    // }
+    if(this.configNameExist(this.state.configName)){
+      Modal.alert('增加配置失败', '配置名称已存在');
+    }
     // axios 增加购物配置
   }
   render() {

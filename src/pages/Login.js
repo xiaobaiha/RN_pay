@@ -9,6 +9,9 @@ export default class Login extends React.Component {
     name: '',
     password: ''
   }
+  componentWillMount(){
+    // async 获取用户信息 若存在，跳转Home
+  }
   handleLogin = () => {
     // axios 请求登录
     //alert(this.state.name)

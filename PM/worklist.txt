@@ -1,0 +1,15 @@
+序号	任务描述					文件			状态
+1		asyncstorage 获取地址		AddConfig		完成
+2		asyncstorage 获取用户信息	Information		完成
+3		axios 修改用户信息			Information		未做
+4		axios handle signup			Signup			完成
+5		axios 请求登录				Login			完成
+6		axios 检验密码是否正确		ChangePassword	未做
+7		axios 修改密码				ChangePassword	未做
+8		axios 获取用户一键购物设置	ShoppingConfig	完成
+9		axios 增加购物配置			AddConfig		未做
+10		axios 注销请求				Setting			未做
+11		axios 获取订单列表			Orders			未做
+12		axios 注销请求				Setting			未做
+13		async 检查配置名称是否存在	AddConfig		未做
+14		async 获取用户信息			Login			未做
