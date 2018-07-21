@@ -7,7 +7,13 @@ export default class AKS extends React.Component {
     configList: []
   }
   componentWillMount(){
-    // axios 获取一键购物配置
+    // AsyncStorgae 获取一键购物配置
+    this.getShopInfo();
+  }
+  async getShopInfo(){
+    let ProductList = await AsyncStorage.getItem('productList');
+    ProductList = JSON.parse(ProductList).productList;
+    this.setState({configList: ProductList});
   }
   handleClick = () => {
     console.log("enter handleclick");

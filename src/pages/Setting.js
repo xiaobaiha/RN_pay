@@ -1,6 +1,6 @@
 import React from 'react';
 import {List, Button} from 'antd-mobile-rn';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, AsyncStorage } from 'react-native';
 
 const Item = List.Item;
 export default class Setting extends React.Component {
@@ -12,6 +12,7 @@ export default class Setting extends React.Component {
   }
   logout = () => {
     // axios 注销请求，若成功，返回登录页面，清除async储存的信息
+    AsyncStorage.clear;
     this.props.navigation.navigate('Login')
   }
   render() {

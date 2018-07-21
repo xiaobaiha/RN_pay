@@ -8,10 +8,10 @@
 7		axios 修改密码				ChangePassword	完成
 8		axios 获取用户一键购物设置	ShoppingConfig	完成
 9		axios 增加购物配置			AddConfig		未做
-10		axios 注销请求				Setting			未做
+10		axios 注销请求				Setting			完成
 11		axios 获取订单列表			Orders			未做
-12		axios 注销请求				Setting			未做
+12		axios 注销请求				Setting			完成
 13		async 检查配置名称是否存在	AddConfig		未做
 14		async 获取用户信息			Login			完成
-15		async 获取一键购物配置		AKS				未做
+15		async 获取一键购物配置		AKS				完成
 16		asyncstorage 保存地址		AddAddress		未做
