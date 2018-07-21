@@ -14,3 +14,4 @@
 13		async 检查配置名称是否存在	AddConfig		未做
 14		async 获取用户信息			Login			未做
 15		async 获取一键购物配置		AKS				未做
+16		asyncstorage 保存地址		AddAddress		未做

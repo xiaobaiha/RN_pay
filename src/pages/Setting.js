@@ -4,6 +4,12 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
 const Item = List.Item;
 export default class Setting extends React.Component {
+  state = {
+    name: ''
+  }
+  componentWillMount(){
+    // async 读取用户名
+  }
   logout = () => {
     // axios 注销请求，若成功，返回登录页面，清除async储存的信息
     this.props.navigation.navigate('Login')
@@ -11,7 +17,7 @@ export default class Setting extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <List renderHeader={() => '设置'}>
+        <List renderHeader={() => (this.state.name+',你好！')}>
           <Item arrow="horizontal" onClick={() => this.props.navigation.navigate('Pay')}>
             充值
           </Item>

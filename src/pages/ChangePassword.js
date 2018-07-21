@@ -7,12 +7,13 @@ import { Button, InputItem, List } from 'antd-mobile-rn';
 export default class ChangePassword extends React.Component {
   state = {
     currentStep: 0,
-    currentPassowrd: '',
-    newPassowrd: '',
-    newPassowrdRepeat: ''
+    currentPassword: '',
+    newPassword: '',
+    newPasswordRepeat: ''
   }
   handleNext = () => {
     // axios 检验密码是否正确
+    this.setState({currentStep: 1})
   }
   handleChangePassword = () => {
     // axios 修改密码
@@ -26,7 +27,7 @@ export default class ChangePassword extends React.Component {
               onErrorPress={() => alert('clicked me')}
               onChange={(value) => {
                 this.setState({
-                  currentPassowrd: value,
+                  currentPassword: value,
                 });
               }}
               type='password'

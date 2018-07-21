@@ -65,7 +65,7 @@ class ChangePasswordScreen extends React.Component {
 
 class AddAddressScreen extends React.Component {
   static navigationOptions = {
-    title: '修改密码',
+    title: '添加地址',
   };
   render() {
     return (<AddAddress navigation={this.props.navigation} />);
