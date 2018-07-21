@@ -1,10 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
-export default class Pay extends React.Component {
+import {List, Button} from 'antd-mobile-rn';
+const Item = List.Item;
+export default class Orders extends React.Component {
+  state = {
+    orderList: []
+  }
+  componentWillMount(){
+    // axios 获取订单列表
+  }
   render() {
+    const {orderList} = this.state;
     return (
-      <View><Text>Order</Text></View>
+      <View>
+        <List>
+          {orderList.map(item=>{
+            return (<Item>
+              {item}
+            </Item>)
+          })}
+        </List>
+      </View>
     );
   }
 }

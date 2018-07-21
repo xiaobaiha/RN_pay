@@ -15,6 +15,7 @@ import AddAddress from './src/pages/AddAddress';
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'WeShop',
+    header: null,
   };
   render() {
     return (
@@ -26,6 +27,8 @@ class HomeScreen extends React.Component {
 class PayScreen extends React.Component {
   static navigationOptions = {
     title: '充值',
+    // header: null,
+    // headerBackTitle: null
   };
   render() {
     return (<Pay navigation={this.props.navigation}/>);
@@ -35,6 +38,7 @@ class PayScreen extends React.Component {
 class LoginScreen extends React.Component {
   static navigationOptions = {
     title: '登录',
+    header: null,
   };
   render() {
     return (<Login navigation={this.props.navigation} />);
@@ -61,7 +65,7 @@ class ChangePasswordScreen extends React.Component {
 
 class AddAddressScreen extends React.Component {
   static navigationOptions = {
-    title: '修改密码',
+    title: '添加地址',
   };
   render() {
     return (<AddAddress navigation={this.props.navigation} />);

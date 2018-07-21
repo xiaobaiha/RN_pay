@@ -3,6 +3,12 @@ import {Button} from 'antd-mobile-rn';
 import { StyleSheet, Text, View } from 'react-native';
 import axios from 'axios';
 export default class AKS extends React.Component {
+  state = {
+    configList: []
+  }
+  componentWillMount(){
+    // axios 获取一键购物配置
+  }
   handleClick = () => {
     console.log("enter handleclick");
   }

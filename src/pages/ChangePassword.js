@@ -91,6 +91,7 @@ export default class ChangePassword extends React.Component {
                   newPassword: value,
                 });
               }}
+              value={this.state.newPassword}
               type='password'
               placeholder="新密码"
             >

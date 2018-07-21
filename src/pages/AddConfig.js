@@ -18,6 +18,7 @@ export default class AddConfig extends React.Component {
     selectProduct: -1,
     selectAddress: -1,
     addressListVisible: false,
+    configName: ''
   }
   componentWillMount() {
     // axios 获取商品列表
@@ -37,7 +38,14 @@ export default class AddConfig extends React.Component {
     this.setState({ address : JSON.parse(Address).addresses });
     //alert(this.state.address);
   }
+  configNameExist = (name) => {
+    // async 检查配置名称是否存在
+    // 若存在 return true, 否则false
+  }
   handleAddConfig = () => {
+    if(this.configNameExist(this.state.configName)){
+      Modal.alert('增加配置失败', '配置名称已存在');
+    }
     // axios 增加购物配置
   }
   render() {
@@ -51,6 +59,18 @@ export default class AddConfig extends React.Component {
     return (
       <View>
         <List renderHeader={() => '添加配置'}>
+        <InputItem
+              onErrorPress={() => alert('clicked me')}
+              onChange={(value) => {
+                this.setState({
+                  configName: value,
+                });
+              }}
+              type='text'
+              placeholder="配置名称"
+            >
+              配置名称
+            </InputItem>
           <Item arrow="horizontal" extra={selectExtra?selectExtra:''} onClick={() => this.setState({productListVisible: true})}>
             选择商品
           </Item>
@@ -69,18 +89,6 @@ export default class AddConfig extends React.Component {
           <Item arrow="horizontal" extra={selectAddress>-1?'已选择':''} onClick={() => this.setState({addressListVisible: true})}>
             选择地址
           </Item>
-          <InputItem
-              onErrorPress={() => alert('clicked me')}
-              onChange={(value) => {
-                this.setState({
-                  phone: value,
-                });
-              }}
-              type='phone'
-              placeholder="电话"
-            >
-              联系电话
-            </InputItem>
           <Button type='primary' onClick={this.handleAddConfig}>增加配置</Button>
         </List>
         <Modal
