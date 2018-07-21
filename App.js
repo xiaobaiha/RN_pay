@@ -15,6 +15,7 @@ import AddAddress from './src/pages/AddAddress';
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'WeShop',
+    header: null,
   };
   render() {
     return (
@@ -26,6 +27,8 @@ class HomeScreen extends React.Component {
 class PayScreen extends React.Component {
   static navigationOptions = {
     title: '充值',
+    // header: null,
+    // headerBackTitle: null
   };
   render() {
     return (<Pay navigation={this.props.navigation}/>);
@@ -35,6 +38,7 @@ class PayScreen extends React.Component {
 class LoginScreen extends React.Component {
   static navigationOptions = {
     title: '登录',
+    header: null,
   };
   render() {
     return (<Login navigation={this.props.navigation} />);
@@ -138,14 +142,8 @@ const RootStack = createStackNavigator(
     AddAddress: AddAddressScreen
   },
   {
-<<<<<<< HEAD
     initialRouteName: 'Home',
-    // initialRouteName: 'AddConfig',
-=======
-    //initialRouteName: 'Home',
-    initialRouteName: 'Login',
->>>>>>> d9cec37ce2c4c0411d0be94700111af6851506c5
-    // initialRouteName: 'Page',
+    // initialRouteName: 'Login',
   }
 );
 
