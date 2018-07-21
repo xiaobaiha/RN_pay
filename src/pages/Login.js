@@ -46,8 +46,6 @@ export default class Login extends React.Component {
         AsyncStorage.setItem('tel', response.data.tel);
         AsyncStorage.setItem('username', response.data.username);
         //AsyncStorage.setItem("money",response.data.money);
-        this.props.navigation.navigate('Home');
-
 
         // axios 获取用户一键购物设置
         let UserId = response.data.id;
@@ -56,14 +54,18 @@ export default class Login extends React.Component {
           url: preURL + "/shop-setting?userId=" + UserId,
         }).then(response => {
           //alert(response.data)
-          let productList = { "productList": response.data };
-          AsyncStorage.setItem('productList', JSON.stringify(productList));
+          let shopList = { "shopList": response.data };
+          this.setShopSet(shopList);
         })
       }
       else {
         Modal.alert("登录错误", response.data.Login_result);
       }
     })
+  }
+  setShopSet= async (shopList)=> {
+    await AsyncStorage.setItem('shopList', JSON.stringify(shopList));
+    this.props.navigation.navigate('Home');
   }
   render() {
     return (

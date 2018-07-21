@@ -89,7 +89,7 @@ class AddConfigScreen extends React.Component {
   };
   render() {
     return (
-      <AddConfig />
+      <AddConfig navigation={this.props.navigation}/>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, SwipeAction, Button } from 'antd-mobile-rn';
-import { StyleSheet, Text, View, TouchableHighlight, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, AsyncStorage, DeviceEventEmitter } from 'react-native';
 import axios from 'axios';
 import { preURL } from '../config/axiosConfig';
 
@@ -9,11 +9,14 @@ export default class ShoppingConfig extends React.Component {
   state = {
     configList: []
   }
-  componentWillMount() {
+  componentWillMount(){
+    DeviceEventEmitter.addListener('reloadConfig', this.loadConfig);
+  }
+  componentDidMount() {
     this.loadConfig();
   }
   loadConfig = async () => {
-    // // axios 获取用户一键购物设置
+    // axios 获取用户一键购物设置
     // let UserId = await AsyncStorage.getItem('id');
     // UserId = JSON.parse(UserId).id;
     // //alert(UserId);
@@ -24,16 +27,17 @@ export default class ShoppingConfig extends React.Component {
     //   //alert(response.data)
     //   let productList = { "productList": response.data };
     //   AsyncStorage.setItem('productList', JSON.stringify(productList));
-    let ProductList = await AsyncStorage.getItem('productList');
-    ProductList = JSON.parse(ProductList).productList;
-    for (i in ProductList) {
+    let ShopList = await AsyncStorage.getItem('shopList');
+    ShopList = JSON.parse(ShopList).shopList;
+    this.setState({configList: []})
+    for (i in ShopList) {
       //alert(response.data[i].id);
-      let newProduct = {
-        "name": ProductList[i].name,
-        "key": ProductList[i].id,
+      let newShop = {
+        "name": ShopList[i].name,
+        "key": ShopList[i].id,
       };
       this.setState({
-        configList: [...this.state.configList, newProduct]
+        configList: [...this.state.configList, newShop]
       });
     }
 
