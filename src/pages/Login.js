@@ -11,6 +11,13 @@ export default class Login extends React.Component {
   }
   componentWillMount(){
     // async 获取用户信息 若存在，跳转Home
+    this.getUserName();
+  }
+  async getUserName(){
+    let username = await AsyncStorage.getItem('username');
+    if(username){
+      this.props.navigation.navigate('Home');
+    }
   }
   handleLogin = () => {
     // axios 请求登录
