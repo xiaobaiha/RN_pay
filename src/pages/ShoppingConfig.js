@@ -17,16 +17,6 @@ export default class ShoppingConfig extends React.Component {
   }
   loadConfig = async () => {
     // axios 获取用户一键购物设置
-    // let UserId = await AsyncStorage.getItem('id');
-    // UserId = JSON.parse(UserId).id;
-    // //alert(UserId);
-    // axios({
-    //   method: "GET",
-    //   url: preURL + "/shop-setting?userId=" + UserId,
-    // }).then(response => {
-    //   //alert(response.data)
-    //   let productList = { "productList": response.data };
-    //   AsyncStorage.setItem('productList', JSON.stringify(productList));
     let ShopList = await AsyncStorage.getItem('shopList');
     ShopList = JSON.parse(ShopList).shopList;
     this.setState({configList: []})
@@ -40,18 +30,13 @@ export default class ShoppingConfig extends React.Component {
         configList: [...this.state.configList, newShop]
       });
     }
-
-    //})
+  }
+  deleteShop = async (key) => {
+    //axios 删除一个一键购物设置
+    alert(key)
   }
 
   render() {
-    const right = [
-      {
-        text: '删除',
-        onPress: () => console.log('delete'),
-        style: { backgroundColor: 'red', color: 'white' },
-      },
-    ];
     const { configList } = this.state;
 
     return (
@@ -61,7 +46,13 @@ export default class ShoppingConfig extends React.Component {
             return (<SwipeAction
               autoClose
               style={{ backgroundColor: 'transparent' }}
-              left={right}
+              left={[
+                {
+                  text: '删除',
+                  onPress: ()=>this.deleteShop(item.key),
+                  style: { backgroundColor: 'red', color: 'white' },
+                },
+              ]}
               key={item.key}
             >
               <Item arrow="horizontal" onClick={() => { }}>

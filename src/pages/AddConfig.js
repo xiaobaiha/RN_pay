@@ -42,7 +42,7 @@ export default class AddConfig extends React.Component {
     // async 检查配置名称是否存在
     // 若存在 return true, 否则false
     let flag = 0;
-    this.getShopList().then(ShopList => {
+    return this.getShopList().then(ShopList => {
       ShopList.forEach(item => {
         //alert("itemname:"+ item.name)
         if (item.name === name) {
@@ -95,7 +95,7 @@ export default class AddConfig extends React.Component {
         "Content-Type": "application/json;charset=UTF-8"
       }
     }).then(response => {
-      if (response.data === "success") {
+      if (response.status === 200) {
         Modal.alert("提示", "添加成功",
           [{
             text: "确定", onPress: () => { this.props.navigation.goBack() }
