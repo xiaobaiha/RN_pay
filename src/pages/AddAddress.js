@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import axios from 'axios';
 import { preURL } from '../config/axiosConfig';
 import { List, Picker, InputItem, Button } from 'antd-mobile-rn';
@@ -13,6 +13,7 @@ export default class AddAddress extends React.Component {
   }
   saveAddress = () => {
     // asyncstorage 保存地址（设置flag，表示还未提交修改）
+
   }
   onClick = () => {
     this.setState({

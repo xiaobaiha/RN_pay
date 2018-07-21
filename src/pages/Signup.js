@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
-import { Button, InputItem } from 'antd-mobile-rn';
+import { Button, InputItem, Modal } from 'antd-mobile-rn';
 import axios from 'axios';
 import { preURL } from '../config/axiosConfig';
 
@@ -25,10 +25,13 @@ export default class Signup extends React.Component {
       }
     }).then(response => {
       if(response.data.Register_result === "ok"){
-        Alert.alert("提示", "注册成功");
+        Modal.alert("提示", "注册成功",
+        [{
+          text: '确定', onPress: ()=> {this.props.navigation.navigate('Login')}
+        }]);
       }
       else {
-        Alert.alert("注册错误", response.data.Register_result);
+        Modal.alert("注册错误", response.data.Register_result);
       }
     })
   }
