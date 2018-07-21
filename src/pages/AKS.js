@@ -1,13 +1,19 @@
 import React from 'react';
 import {Button} from 'antd-mobile-rn';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import axios from 'axios';
 export default class AKS extends React.Component {
   state = {
     configList: []
   }
   componentWillMount(){
-    // axios 获取一键购物配置
+    // AsyncStorgae 获取一键购物配置
+    this.getShopInfo();
+  }
+  async getShopInfo(){
+    let ShopList = await AsyncStorage.getItem('shopList');
+    ShopList = JSON.parse(ShopList).shopList;
+    this.setState({configList: ShopList});
   }
   handleClick = () => {
     console.log("enter handleclick");

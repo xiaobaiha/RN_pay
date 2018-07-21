@@ -9,8 +9,15 @@ export default class Login extends React.Component {
     name: '',
     password: ''
   }
-  componentWillMount(){
+  componentWillMount() {
     // async 获取用户信息 若存在，跳转Home
+    this.getUserName();
+  }
+  async getUserName() {
+    let username = await AsyncStorage.getItem('username');
+    if (username) {
+      this.props.navigation.navigate('Home');
+    }
   }
   handleLogin = () => {
     // axios 请求登录
@@ -29,22 +36,36 @@ export default class Login extends React.Component {
     }).then(response => {
       console.log(response)
       //Alert.alert("标题", response.data.money)
-      if(response.data.Login_result === "ok"){
+      if (response.data.Login_result === "ok") {
         //储存登录用户数据到AsyncStorage，数组与int格式的数据存为json格式再储存
-        //AsyncStorage.clear();
-        let Addresses = { "addresses" : response.data.addresses };
+        //AsyncStorage.clear;
+        let Addresses = { "addresses": response.data.addresses };
         AsyncStorage.setItem('addresses', JSON.stringify(Addresses));
-        let Id = { "id" : response.data.id };
+        let Id = { "id": response.data.id };
         AsyncStorage.setItem('id', JSON.stringify(Id));
         AsyncStorage.setItem('tel', response.data.tel);
         AsyncStorage.setItem('username', response.data.username);
         //AsyncStorage.setItem("money",response.data.money);
-        this.props.navigation.navigate('Home');
+
+        // axios 获取用户一键购物设置
+        let UserId = response.data.id;
+        axios({
+          method: "GET",
+          url: preURL + "/shop-setting?userId=" + UserId,
+        }).then(response => {
+          //alert(response.data)
+          let shopList = { "shopList": response.data };
+          this.setShopSet(shopList);
+        })
       }
-      else{
+      else {
         Modal.alert("登录错误", response.data.Login_result);
       }
     })
+  }
+  setShopSet= async (shopList)=> {
+    await AsyncStorage.setItem('shopList', JSON.stringify(shopList));
+    this.props.navigation.navigate('Home');
   }
   render() {
     return (
