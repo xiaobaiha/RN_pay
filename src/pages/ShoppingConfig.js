@@ -10,7 +10,7 @@ export default class ShoppingConfig extends React.Component {
     configList: []
   }
   componentWillMount(){
-    DeviceEventEmitter.addListener('reloadConfig', this.loadConfig);
+    DeviceEventEmitter.addListener('reloadConfig1', this.loadConfig);
   }
   componentDidMount() {
     this.loadConfig();

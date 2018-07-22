@@ -111,7 +111,7 @@ export default class AddConfig extends React.Component {
     let ShopList = await AsyncStorage.getItem('shopList');
     ShopList = JSON.parse(ShopList).shopList;
     let newShop = {
-      id: Id, //?
+      id: Id, 
       userId: UserId,
       itemId: this.state.selectProduct,
       amount: this.state.numbers,
@@ -122,8 +122,10 @@ export default class AddConfig extends React.Component {
     ShopList = [...ShopList, newShop];
     let shopList = { "shopList": ShopList };
     await AsyncStorage.setItem('shopList', JSON.stringify(shopList));
-    DeviceEventEmitter.emit("reloadConfig", []);
-    // DeviceEventEmitter 通知AKS更新数据
+    //通知ShoppingConfig更新数据
+    DeviceEventEmitter.emit("reloadConfig1", []);
+    //通知AKS更新数据
+    DeviceEventEmitter.emit("reloadConfig2", []);
   }
   render() {
     const { productList, selectProduct, selectAddress, address } = this.state;
