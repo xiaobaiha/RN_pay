@@ -46,6 +46,8 @@ export default class Login extends React.Component {
         AsyncStorage.setItem('tel', response.data.tel);
         AsyncStorage.setItem('username', response.data.username);
         //AsyncStorage.setItem("money",response.data.money);
+        let TempAddresses = {"tempaddresses": []};
+        AsyncStorage.setItem('tempaddresses', JSON.stringify(TempAddresses));
 
         // axios 获取用户一键购物设置
         let UserId = response.data.id;

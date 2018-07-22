@@ -15,9 +15,9 @@ export default class Setting extends React.Component {
     let Name = await AsyncStorage.getItem('username');
     this.setState({ name : Name });
   }
-  logout = () => {
+  logout = async () => {
     // axios 注销请求，若成功，返回登录页面，清除async储存的信息
-    AsyncStorage.clear;
+    await AsyncStorage.clear();
     this.props.navigation.navigate('Login')
   }
   render() {

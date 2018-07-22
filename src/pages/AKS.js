@@ -1,35 +1,56 @@
 import React from 'react';
-import {Button} from 'antd-mobile-rn';
+import { Button, Modal } from 'antd-mobile-rn';
 import { StyleSheet, Text, View, AsyncStorage, DeviceEventEmitter } from 'react-native';
 import axios from 'axios';
+import { preURL } from '../config/axiosConfig';
 export default class AKS extends React.Component {
   state = {
     configList: []
   }
-  componentWillMount(){
+  componentWillMount() {
     DeviceEventEmitter.addListener('reloadConfig2', this.getShopInfo);
   }
-  componentDidMount(){
+  componentDidMount() {
     // AsyncStorgae 获取一键购物配置
     this.getShopInfo();
   }
-  getShopInfo = async ()=> {
+  getShopInfo = async () => {
     let ShopList = await AsyncStorage.getItem('shopList');
     ShopList = JSON.parse(ShopList).shopList;
     //alert(JSON.stringify(ShopList))
-    this.setState({configList: ShopList});
+    this.setState({ configList: ShopList });
   }
   handleClick = (key) => {
     // axios 一键购物
+    let ShopItem = this.state.configList.filter((item) => {
+      return item.id == key;
+    });
+    //alert(JSON.stringify(ShopItem[0]))
+    axios({
+      method: "POST",
+      url: preURL + "/shop",
+      dataType: "json",
+      data: ShopItem[0],
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8"
+      }
+    }).then(response => {
+      if (response.data === "success") {
+        Modal.alert("提示", "购买成功");
+      }
+      else{
+        Modal.alert("购买失败", response.data);
+      }
+    })
   }
   render() {
-    const {configList} = this.state;
+    const { configList } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.btn_group}>
-        {configList.map(item => {
-          return <Button key={item.id} onClick={()=>this.handleClick(item.id)} style={styles.btn}>{item.name}</Button>
-        })}
+          {configList.map(item => {
+            return <Button key={item.id} onClick={() => this.handleClick(item.id)} style={styles.btn}>{item.name}</Button>
+          })}
         </View>
       </View>
     );
@@ -44,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexWrap: 'wrap'
   },
-  btn_group:{
+  btn_group: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',

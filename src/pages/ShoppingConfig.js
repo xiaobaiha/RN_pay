@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, SwipeAction, Button } from 'antd-mobile-rn';
+import { List, SwipeAction, Button, Modal } from 'antd-mobile-rn';
 import { StyleSheet, Text, View, TouchableHighlight, AsyncStorage, DeviceEventEmitter } from 'react-native';
 import axios from 'axios';
 import { preURL } from '../config/axiosConfig';
@@ -9,7 +9,7 @@ export default class ShoppingConfig extends React.Component {
   state = {
     configList: []
   }
-  componentWillMount(){
+  componentWillMount() {
     DeviceEventEmitter.addListener('reloadConfig1', this.loadConfig);
   }
   componentDidMount() {
@@ -19,7 +19,7 @@ export default class ShoppingConfig extends React.Component {
     // axios 获取用户一键购物设置
     let ShopList = await AsyncStorage.getItem('shopList');
     ShopList = JSON.parse(ShopList).shopList;
-    this.setState({configList: []})
+    this.setState({ configList: [] })
     for (i in ShopList) {
       //alert(response.data[i].id);
       let newShop = {
@@ -33,7 +33,27 @@ export default class ShoppingConfig extends React.Component {
   }
   deleteShop = async (key) => {
     //axios 删除一个一键购物设置
-    alert(key)
+    //alert(key)
+    let ShopList = await AsyncStorage.getItem('shopList');
+    ShopList = JSON.parse(ShopList).shopList;
+    axios({
+      method: "DELETE",
+      url: preURL + "/shop-setting/" + key,
+    }).then(response=>{
+      if(response.status===200){
+        ShopList.forEach(item => {
+          if(item.id === key){
+            ShopList.splice(ShopList.indexOf(item),1);
+          }
+        });
+        let shopList = { "shopList": ShopList };
+        AsyncStorage.setItem('shopList', JSON.stringify(shopList));
+        this.loadConfig();
+      }
+      else{
+        Modal.alert("提示","删除失败")
+      }
+    })
   }
 
   render() {
@@ -49,7 +69,7 @@ export default class ShoppingConfig extends React.Component {
               left={[
                 {
                   text: '删除',
-                  onPress: ()=>this.deleteShop(item.key),
+                  onPress: () => this.deleteShop(item.key),
                   style: { backgroundColor: 'red', color: 'white' },
                 },
               ]}
