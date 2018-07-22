@@ -10,8 +10,10 @@
 9		axios 增加购物配置			AddConfig		完成
 10		axios 注销请求				Setting			完成
 11		axios 获取订单列表			Orders			未做
-12		async 检查配置名称是否存在	AddConfig		未做
+12		async 检查配置名称是否存在	AddConfig		完成
 13		async 获取用户信息			Login			完成
 14		async 获取一键购物配置       AKS		     完成
 15		asyncstorage 保存地址		AddAddress		未做
 16      asyncstorage 读取用户名     Setting         完成
+17      axios 一件购物              AKS	    未做
+18      DeviceEventEmitter 通知AKS更新数据    AddConfig 未做

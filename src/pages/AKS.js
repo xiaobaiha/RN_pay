@@ -13,21 +13,20 @@ export default class AKS extends React.Component {
   async getShopInfo(){
     let ShopList = await AsyncStorage.getItem('shopList');
     ShopList = JSON.parse(ShopList).shopList;
+    alert(JSON.stringify(ShopList))
     this.setState({configList: ShopList});
   }
-  handleClick = () => {
-    console.log("enter handleclick");
+  handleClick = (key) => {
+    // axios 一键购物
   }
   render() {
+    const {configList} = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.btn_group}>
-          <Button onClick={this.handleClick} style={styles.btn}>购纸</Button>
-          <Button style={styles.btn}>购油</Button>
-        </View>
-        <View style={styles.btn_group}>
-          <Button style={styles.btn}>AKS</Button>
-          <Button style={styles.btn}>AKS</Button>
+        {configList.map(item => {
+          return <Button onClick={()=>this.handleClick(item.id)} style={styles.btn}>{item.name}</Button>
+        })}
         </View>
       </View>
     );
@@ -40,11 +39,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
+    flexWrap: 'wrap'
   },
   btn_group:{
-    flexDirection: 'column',
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-around',
-    width: 100
+    flexWrap: 'wrap',
+    margin: 20
   },
   btn: {
     marginBottom: 50,

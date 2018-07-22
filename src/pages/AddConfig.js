@@ -123,6 +123,7 @@ export default class AddConfig extends React.Component {
     let shopList = { "shopList": ShopList };
     await AsyncStorage.setItem('shopList', JSON.stringify(shopList));
     DeviceEventEmitter.emit("reloadConfig", []);
+    // DeviceEventEmitter 通知AKS更新数据
   }
   render() {
     const { productList, selectProduct, selectAddress, address } = this.state;
@@ -216,7 +217,7 @@ export default class AddConfig extends React.Component {
                 key={index}
               >
                 <View>
-                  <Text>'address'</Text>
+                  <Text>{item}</Text>
                 </View>
               </RadioItem>)
             })}
