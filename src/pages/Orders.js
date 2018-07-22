@@ -19,9 +19,8 @@ export default class Orders extends React.Component {
       method: "GET",
       url: preURL + "/shop-history?userId=" + UserId,
     }).then(response => {
-      //alert(JSON.stringify(response.data));
       this.setState({orderList: response.data});
-      alert(JSON.stringify(this.state.orderList))
+
     })
   }
 
@@ -31,8 +30,8 @@ export default class Orders extends React.Component {
       <View>
         <List>
           {orderList.map(item=>{
-            return (<Item>
-              {item}
+            return (<Item key={item.id}>
+              {item.info}
             </Item>)
           })}
         </List>
