@@ -13,7 +13,7 @@ export default class AKS extends React.Component {
   async getShopInfo(){
     let ShopList = await AsyncStorage.getItem('shopList');
     ShopList = JSON.parse(ShopList).shopList;
-    alert(JSON.stringify(ShopList))
+    // alert(JSON.stringify(ShopList))
     this.setState({configList: ShopList});
   }
   handleClick = (key) => {
@@ -25,7 +25,7 @@ export default class AKS extends React.Component {
       <View style={styles.container}>
         <View style={styles.btn_group}>
         {configList.map(item => {
-          return <Button onClick={()=>this.handleClick(item.id)} style={styles.btn}>{item.name}</Button>
+          return <Button key={item.id} onClick={()=>this.handleClick(item.id)} style={styles.btn}>{item.name}</Button>
         })}
         </View>
       </View>

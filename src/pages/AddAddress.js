@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import axios from 'axios';
 import { preURL } from '../config/axiosConfig';
-import { List, Picker, InputItem, Button } from 'antd-mobile-rn';
+import { List, Picker, InputItem, Button, Modal } from 'antd-mobile-rn';
 import { district } from 'antd-mobile-demo-data';
 
 export default class AddAddress extends React.Component {
@@ -12,7 +12,32 @@ export default class AddAddress extends React.Component {
     detailAddress: ''
   }
   saveAddress = () => {
-    // asyncstorage 保存地址（设置flag，表示还未提交修改）
+    const {value, detailAddress} = this.state;
+    if(value.length === 0){
+      Modal.alert('增加地址失败', '请先选择地区');
+      return;
+    } else if(detailAddress === ''){
+      Modal.alert('增加地址失败', '请输入详细地址');
+      return;
+    }
+    let name = [];
+    district.forEach(item1=>{
+      if(item1.value === value[0]){
+        name.push(item1.label);
+        item1.children.forEach(item2 => {
+          if(item2.value === value[1]){
+            name.push(item2.label);
+            item2.children.forEach(item3=>{
+              if(item3.value === value[2]){
+                name.push(item3.label);
+              }
+            })
+          }
+        })
+      }
+    });
+    let fullAddress = name.join('') + detailAddress;
+    // asyncstorage 暂存修改地址
 
   }
   onClick = () => {
