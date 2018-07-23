@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   AsyncStorage,
   DeviceEventEmitter
 } from "react-native";
