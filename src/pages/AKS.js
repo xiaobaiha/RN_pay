@@ -8,10 +8,21 @@ import {
   View,
   Image,
   DeviceEventEmitter,
-  ImageBackground
+  ImageBackground,
+  TouchableHighlight
 } from "react-native";
 import axios from "axios";
 import { preURL } from "../config/axiosConfig";
+// import ButtonStyle from "antd-mobile-rn/lib/button/style/index.native";
+
+// let newButtonStyle = {
+//   ...ButtonStyle,
+//   container: {
+//     ...ButtonStyle.container,
+//     flexDirection: "column"
+//   }
+// };
+
 export default class AKS extends React.Component {
   state = {
     configList: []
@@ -65,21 +76,23 @@ export default class AKS extends React.Component {
                 "https://raw.githubusercontent.com/xiaobaiha/RN_pay/master/src/styles/imgs/" +
                 item.itemId +
                 ".jpg";
-              // alert(tempStr);
               return (
-                <Button
+                <TouchableHighlight
                   key={item.id}
-                  onClick={() => this.handleClick(item.id)}
+                  onPress={() => this.handleClick(item.id)}
                   style={styles.btn}
+                  underlayColor="white"
                 >
-                  <Image
-                    style={styles.innerImg}
-                    source={{
-                      uri: tempStr
-                    }}
-                  />
-                  <Text>{item.name}</Text>
-                </Button>
+                  <View>
+                    <Image
+                      style={styles.innerImg}
+                      source={{
+                        uri: tempStr
+                      }}
+                    />
+                    <Text style={styles.btnText}>{item.name}</Text>
+                  </View>
+                </TouchableHighlight>
               );
             })}
             {configList.length === 0 ? (
@@ -117,10 +130,16 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   btn: {
-    width: 150,
+    width: 170,
     height: 200,
     margin: 10,
-    flexDirection: "column"
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    backgroundColor: "white",
+    borderColor: "grey",
+    borderRadius: 10
   },
   noConfig: {
     width: 300,
@@ -130,8 +149,8 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   innerImg: {
-    width: 300,
-    height: 350
+    width: 150,
+    height: 150
   },
   weshopText: {
     flex: 3,
