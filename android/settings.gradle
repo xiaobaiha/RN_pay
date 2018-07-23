@@ -1,4 +1,4 @@
-rootProject.name = 'reactNativeDemo'
+rootProject.name = 'WeShop'
 
 include ':app'
 include ':react-native-yunpeng-alipay'
