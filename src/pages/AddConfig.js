@@ -246,7 +246,6 @@ export default class AddConfig extends React.Component {
           popup
           visible={this.state.addressListVisible}
           animationType="slide-up"
-          onClose={() => this.setState({ addressListVisible: false })}
         >
           <ScrollView
             contentContainerStyle={{
