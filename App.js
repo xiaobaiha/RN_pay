@@ -11,6 +11,7 @@ import Login from "./src/pages/Login";
 import Signup from "./src/pages/Signup";
 import ChangePassword from "./src/pages/ChangePassword";
 import AddAddress from "./src/pages/AddAddress";
+import Launch from "./src/pages/Launch";
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -31,6 +32,14 @@ class PayScreen extends React.Component {
   }
 }
 
+class LaunchScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+  render() {
+    return <Launch navigation={this.props.navigation} />;
+  }
+}
 class ModifyConfigScreen extends React.Component {
   static navigationOptions = {
     title: "修改配置"
@@ -125,11 +134,12 @@ const RootStack = createStackNavigator(
     Signup: SignupScreen,
     ChangePassword: ChangePasswordScreen,
     AddAddress: AddAddressScreen,
-    ModifyConfig: ModifyConfigScreen
+    ModifyConfig: ModifyConfigScreen,
+    Launch: LaunchScreen
   },
   {
     //initialRouteName: 'Home',
-    initialRouteName: "Login"
+    initialRouteName: "Launch"
     // initialRouteName: "Page"
   }
 );

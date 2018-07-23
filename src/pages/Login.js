@@ -15,14 +15,14 @@ export default class Login extends React.Component {
     // async 获取用户信息 若存在，跳转Home
     this.getUserName();
   }
-  componentDidMount() {
-    const { closeFlag } = this.state;
-    if (!closeFlag) {
-      Toast.loading("加载数据中...", 1, () => {
-        this.setState({ closeFlag: true });
-      });
-    }
-  }
+  // componentDidMount() {
+  //   const { closeFlag } = this.state;
+  //   if (!closeFlag) {
+  //     Toast.loading("加载数据中...", 1, () => {
+  //       this.setState({ closeFlag: true });
+  //     });
+  //   }
+  // }
   async getUserName() {
     let username = await AsyncStorage.getItem("username");
     if (username) {
@@ -78,7 +78,7 @@ export default class Login extends React.Component {
   };
   render() {
     const { configLoaded, closeFlag } = this.state;
-    if (configLoaded && closeFlag) {
+    if (configLoaded) {
       return (
         <View>
           <InputItem
