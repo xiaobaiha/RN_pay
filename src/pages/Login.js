@@ -25,8 +25,8 @@ export default class Login extends React.Component {
   state = {
     name: "",
     password: "",
-    configLoaded: true,
-    closeFlag: true
+    configLoaded: false,
+    closeFlag: false
   };
   componentWillMount() {
     // async 获取用户信息 若存在，跳转Home
