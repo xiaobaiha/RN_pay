@@ -1,73 +1,76 @@
-/* tslint:disable:jsx-no-multiline-js */
-import React from 'react';
-import { Text, View } from 'react-native';
-import { List, Radio, WhiteSpace } from 'antd-mobile-rn';
-const RadioItem = Radio.RadioItem;
+/* tslint:disable:no-console */
+import React from "react";
+import { DeviceEventEmitter } from "react-native";
+import { Button, Toast, WhiteSpace, WingBlank } from "antd-mobile-rn";
 
-export default class BasicRadioExample extends React.Component {
-  state = {
-    part1Value: 1,
-    part2Value: 1,
+function showToast() {
+  Toast.info("This is a toast tips !!!");
+}
+
+function successToast() {
+  Toast.success("Load success !!!", 1);
+}
+
+function showToastNoMask() {
+  Toast.info("Toast without mask !!!", 1, null, false);
+}
+
+function failToast() {
+  Toast.fail("Load failed !!!");
+}
+
+function offline() {
+  Toast.offline("Network connection failed !!!");
+}
+
+function loadingToast() {
+  Toast.loading("Loading...", 1, () => {
+    console.log("Load complete !!!");
+  });
+}
+
+export default class ToastExample extends React.Component<any, any> {
+  timer: any;
+  componentDidMount() {
+    DeviceEventEmitter.addListener("navigatorBack", () => {
+      Toast.hide();
+    });
+  }
+
+  componentWillUnmount() {
+    // (DeviceEventEmitter as any).removeAllListeners('navigatorBack');
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+  }
+
+  alwaysShowToast = () => {
+    Toast.info("A toast width duration = 0 !!!", 0);
+    this.timer = setTimeout(() => {
+      Toast.hide();
+    }, 5000);
   };
 
   render() {
     return (
-      <View>
-        <View style={{ padding: 10 }}>
-          <Radio
-            checked={this.state.part1Value === 1}
-            onChange={(event) => {
-              if (event.target.checked) {
-                this.setState({ part1Value: 1 });
-              }
-            }}
-            style={{ borderWidth: 1, borderColor: '#999', margin: 10 }}
-          >
-            Support
-          </Radio>
-          <WhiteSpace />
-          <Radio
-            checked={this.state.part1Value === 2}
-            onChange={(event) => {
-              if (event.target.checked) {
-                this.setState({ part1Value: 2 });
-              }
-            }}
-            style={{ borderWidth: 1, borderColor: '#999', margin: 10 }}
-          />
-          <WhiteSpace />
-        </View>
-
-        <List style={{ marginTop: 12 }}>
-          <Text style={{ marginTop: 12 }}>
-            Form radio, radio in general list.
-          </Text>
-          <RadioItem
-            checked={this.state.part2Value === 1}
-            onChange={(event) => {
-              if (event.target.checked) {
-                this.setState({ part2Value: 1 });
-              }
-            }}
-          >
-            Use Ant Desgin Component
-          </RadioItem>
-          <RadioItem
-            checked={this.state.part2Value === 2}
-            onChange={(event) => {
-              if (event.target.checked) {
-                this.setState({ part2Value: 2 });
-              }
-            }}
-          >
-            Use Ant Desgin Component
-          </RadioItem>
-          <RadioItem disabled>Set disabled</RadioItem>
-          <RadioItem disabled checked>
-            Set disabled
-          </RadioItem>
-        </List>
-      </View>
+      <WingBlank style={{ marginTop: 80 }}>
+        <WhiteSpace />
+        <Button onClick={showToastNoMask}>Without mask</Button>
+        <WhiteSpace />
+        <Button onClick={showToast}>Text toast</Button>
+        <WhiteSpace />
+        <Button onClick={successToast}>Success toast</Button>
+        <WhiteSpace />
+        <Button onClick={failToast}>Failed toast</Button>
+        <WhiteSpace />
+        <Button onClick={offline}>Network failure toast</Button>
+        <WhiteSpace />
+        <Button onClick={loadingToast}>Loading toast</Button>
+        <WhiteSpace />
+        <Button onClick={this.alwaysShowToast}>Toast width duration = 0</Button>
+        <WhiteSpace />
+      </WingBlank>
     );
   }
 }
