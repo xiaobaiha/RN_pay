@@ -27,7 +27,8 @@ export default class ModifyConfig extends React.Component {
       selectAddress: -1,
       selectAddressStr: config.address,
       addressListVisible: false,
-      configName: config.name
+      configName: config.name,
+      ID: config.id
     };
   }
   componentWillMount() {
@@ -59,7 +60,7 @@ export default class ModifyConfig extends React.Component {
     // 若存在 return true, 否则false
     let flag = 0;
     return this.getShopList().then(ShopList => {
-      ShopList.forEach(item => {
+      ShopList.filter(item=>item.id!==this.state.ID).forEach(item => {
         if (item.name === name) {
           flag = 1;
         }
@@ -90,8 +91,8 @@ export default class ModifyConfig extends React.Component {
     let UserId = await AsyncStorage.getItem("id");
     UserId = JSON.parse(UserId).id;
     axios({
-      method: "POST",
-      url: preURL + "/shop-setting",
+      method: "PUT",
+      url: preURL + "/shop-setting/"+this.state.ID,
       dataType: "json",
       data: {
         address: this.state.address[this.state.selectAddress],
@@ -106,7 +107,7 @@ export default class ModifyConfig extends React.Component {
       }
     }).then(response => {
       if (response.status === 200) {
-        Modal.alert("提示", "添加成功", [
+        Modal.alert("提示", "修改成功", [
           {
             text: "确定",
             onPress: () => {
@@ -114,16 +115,16 @@ export default class ModifyConfig extends React.Component {
             }
           }
         ]);
-        this.reloadProductList(UserId, response.data.id);
+        this.modifyProductList(UserId, this.state.ID);
       } else {
-        Modal.alert("提示", "添加失败");
+        Modal.alert("提示", "修改失败");
       }
     });
   };
-  async reloadProductList(UserId, Id) {
+  async modifyProductList(UserId, Id) {
     let ShopList = await AsyncStorage.getItem("shopList");
     ShopList = JSON.parse(ShopList).shopList;
-    let newShop = {
+    let modifyShop = {
       id: Id,
       userId: UserId,
       itemId: this.state.selectProduct,
@@ -132,7 +133,11 @@ export default class ModifyConfig extends React.Component {
       intervalTime: 0, //?
       name: this.state.configName
     };
-    ShopList = [...ShopList, newShop];
+    ShopList.forEach(item=>{
+      if(item.id === Id){
+        ShopList[ShopList.indexOf(item)] = modifyShop;
+      }
+    })
     let shopList = { shopList: ShopList };
     await AsyncStorage.setItem("shopList", JSON.stringify(shopList));
     //通知ShoppingConfig更新数据

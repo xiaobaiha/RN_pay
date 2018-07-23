@@ -64,7 +64,7 @@ export default class AddAddress extends React.Component {
         "Content-type": "application/json;charset=UTF-8"
       }
     }).then(response => {
-      if (response.data === "string") {
+      if (response.data === "success") {
         Modal.alert("提示", "修改成功", [
           {
             text: "确定",

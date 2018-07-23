@@ -1,7 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { Button, Radio, List, Grid } from "antd-mobile-rn";
+import { StyleSheet, Text, View, Image, AsyncStorage } from "react-native";
+import { Button, Radio, List, Grid, Modal } from "antd-mobile-rn";
 import Alipay from "react-native-yunpeng-alipay";
+import axios from "axios";
+import { preURL } from "../config/axiosConfig"
 const RadioItem = Radio.RadioItem;
 
 export default class Pay extends React.Component {
@@ -12,10 +14,10 @@ export default class Pay extends React.Component {
   async pay(params) {
     // params 为后端提供的参数
     Alipay.pay(params).then(
-      function(data) {
+      function (data) {
         console.log(data);
       },
-      function(err) {
+      function (err) {
         console.log(err);
       }
     );
@@ -32,8 +34,29 @@ export default class Pay extends React.Component {
     }
   };
 
-  handleVirtualPay = money => {
+  handleVirtualPay = async (money) => {
     // axios 虚拟银行付款
+    let UserId = await AsyncStorage.getItem("id");
+    UserId = JSON.parse(UserId).id;
+    axios({
+      method: "POST",
+      url: preURL + "/new-recharge",
+      dataType: "json",
+      data: {
+        id: UserId,
+        money: money
+      },
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8"
+      }
+    }).then(response => {
+      if (response.status === 200) {
+        Modal.alert("提示", "充值成功");
+      }
+      else {
+        Modal.alert("提示", "充值失败");
+      }
+    })
   };
 
   handleToggle = e => {
