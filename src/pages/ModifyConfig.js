@@ -199,6 +199,10 @@ export default class ModifyConfig extends React.Component {
                 this.setState({
                   numbers: parseInt(value)
                 });
+              } else if (value === "") {
+                this.setState({
+                  numbers: 0
+                });
               }
             }}
             value={"" + numbers}
