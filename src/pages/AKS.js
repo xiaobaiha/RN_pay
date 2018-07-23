@@ -82,6 +82,12 @@ export default class AKS extends React.Component {
                 </Button>
               );
             })}
+            {configList.length === 0 ? (
+              <View style={styles.noConfig}>
+                <Text>您还没有进行配置(┬＿┬)</Text>
+                <Text>请先增加购物配置</Text>
+              </View>
+            ) : null}
           </View>
         </ImageBackground>
       </ScrollView>
@@ -114,6 +120,13 @@ const styles = StyleSheet.create({
     width: 150,
     height: 200,
     margin: 10,
+    flexDirection: "column"
+  },
+  noConfig: {
+    width: 300,
+    height: 200,
+    marginLeft: 100,
+    marginTop: 250,
     flexDirection: "column"
   },
   innerImg: {
