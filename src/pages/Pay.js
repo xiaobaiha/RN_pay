@@ -50,11 +50,11 @@ export default class Pay extends React.Component {
         "Content-Type": "application/json;charset=UTF-8"
       }
     }).then(response => {
-      if (response.status === 200) {
+      if (response.data === "success") {
         Modal.alert("提示", "充值成功");
       }
       else {
-        Modal.alert("提示", "充值失败");
+        Modal.alert("提示", response.data);
       }
     })
   };

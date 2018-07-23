@@ -57,6 +57,7 @@ export default class ShoppingConfig extends React.Component {
         let shopList = { shopList: ShopList };
         AsyncStorage.setItem("shopList", JSON.stringify(shopList));
         this.loadConfig();
+        DeviceEventEmitter.emit('reloadConfig2',[]);
       } else {
         Modal.alert("提示", "删除失败");
       }
