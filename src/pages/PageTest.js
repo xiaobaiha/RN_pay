@@ -29,8 +29,8 @@ function loadingToast() {
   });
 }
 
-export default class ToastExample extends React.Component<any, any> {
-  timer: any;
+export default class ToastExample extends React.Component {
+  timer;
   componentDidMount() {
     DeviceEventEmitter.addListener("navigatorBack", () => {
       Toast.hide();

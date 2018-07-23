@@ -19,3 +19,4 @@
 18      DeviceEventEmitter 通知AKS更新数据    AddConfig 完成
 19      axios 删除配置              ShoppingConfig  完成
 20      axios 增加购物配置  => axios 修改购物配置   ModifyConfig  未做
+21      axios 虚拟银行付款          Pay       未做
