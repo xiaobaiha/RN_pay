@@ -24,17 +24,29 @@ let newInputItemStyle = {
 export default class Signup extends React.Component {
   state = {
     name: "",
-    password: ""
+    password: "",
+    passwordRepeat: ""
   };
   handleSignup = () => {
+    const { name, password, passwordRepeat } = this.state;
+    if (name === "") {
+      Modal.alert("注册错误", "用户名不能为空");
+      return;
+    } else if (password !== passwordRepeat) {
+      Modal.alert("注册错误", "两次输入的密码不同");
+      return;
+    } else if (password.length < 6) {
+      Modal.alert("注册错误", "密码必须大于等于6位");
+      return;
+    }
     // axios handle signup
     axios({
       method: "POST",
       url: preURL + "/Register",
       dataType: "json",
       data: {
-        user_name: this.state.name,
-        user_password: this.state.password
+        user_name: name,
+        user_password: password
       },
       headers: {
         "Content-Type": "application/json;charset=UTF-8"
@@ -86,7 +98,7 @@ export default class Signup extends React.Component {
             onErrorPress={() => alert("clicked me")}
             onChange={value => {
               this.setState({
-                password: value
+                passwordRepeat: value
               });
             }}
             type="password"
