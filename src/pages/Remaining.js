@@ -1,28 +1,26 @@
-import React from 'react';
-import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
-import axios from 'axios';
-import { preURL } from '../config/axiosConfig'
+import React from "react";
+import { StyleSheet, Text, View, AsyncStorage } from "react-native";
+import axios from "axios";
+import { preURL } from "../config/axiosConfig";
 
 export default class Pay extends React.Component {
   state = {
-    remains: 0,
-  }
+    remains: 0
+  };
   componentWillMount() {
     // axios 获取余额
     this.getBalance();
   }
-  async getBalance(){
-    let UserId = await AsyncStorage.getItem('id');
+  async getBalance() {
+    let UserId = await AsyncStorage.getItem("id");
     UserId = JSON.parse(UserId).id;
-    //alert(this.state.userId);
     axios({
       method: "GET",
-      url: preURL + "/balance?userId=" + UserId,
+      url: preURL + "/balance?userId=" + UserId
     }).then(response => {
-      console.log(response)
-      //alert(response.data)
-      this.setState({ remains: response.data })
-    })
+      console.log(response);
+      this.setState({ remains: response.data });
+    });
   }
   render() {
     const { remains } = this.state;
@@ -37,8 +35,8 @@ export default class Pay extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });

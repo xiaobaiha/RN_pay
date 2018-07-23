@@ -44,7 +44,6 @@ export default class ShoppingConfig extends React.Component {
     //axios 删除一个一键购物设置
     let ShopList = await AsyncStorage.getItem("shopList");
     ShopList = JSON.parse(ShopList).shopList;
-    alert(JSON.stringify(ShopList));
     axios({
       method: "DELETE",
       url: preURL + "/shop-setting/" + key

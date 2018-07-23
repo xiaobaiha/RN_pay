@@ -18,7 +18,6 @@ export default class ModifyConfig extends React.Component {
   constructor(props) {
     super(props);
     const config = props.navigation.getParam("config", "item default config");
-    alert(JSON.stringify(config));
     this.state = {
       productList: [], // 商品列表
       numbers: config.amount, // 商品数量

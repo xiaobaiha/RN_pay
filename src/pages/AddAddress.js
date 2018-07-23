@@ -1,23 +1,29 @@
-import React from 'react';
-import { StyleSheet, Text, View, AsyncStorage, DeviceEventEmitter } from 'react-native';
-import axios from 'axios';
-import { preURL } from '../config/axiosConfig';
-import { List, Picker, InputItem, Button, Modal } from 'antd-mobile-rn';
-import { district } from 'antd-mobile-demo-data';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  AsyncStorage,
+  DeviceEventEmitter
+} from "react-native";
+import axios from "axios";
+import { preURL } from "../config/axiosConfig";
+import { List, Picker, InputItem, Button, Modal } from "antd-mobile-rn";
+import { district } from "antd-mobile-demo-data";
 
 export default class AddAddress extends React.Component {
   state = {
     data: [],
     value: [],
-    detailAddress: ''
-  }
+    detailAddress: ""
+  };
   saveAddress = async () => {
     const { value, detailAddress } = this.state;
     if (value.length === 0) {
-      Modal.alert('增加地址失败', '请先选择地区');
+      Modal.alert("增加地址失败", "请先选择地区");
       return;
-    } else if (detailAddress === '') {
-      Modal.alert('增加地址失败', '请输入详细地址');
+    } else if (detailAddress === "") {
+      Modal.alert("增加地址失败", "请输入详细地址");
       return;
     }
     let name = [];
@@ -31,19 +37,18 @@ export default class AddAddress extends React.Component {
               if (item3.value === value[2]) {
                 name.push(item3.label);
               }
-            })
+            });
           }
-        })
+        });
       }
     });
-    let fullAddress = name.join('') + detailAddress;
+    let fullAddress = name.join("") + detailAddress;
     // axios 增加地址
-    //alert(fullAddress)
-    let Address = await AsyncStorage.getItem('addresses');
+    let Address = await AsyncStorage.getItem("addresses");
     Address = JSON.parse(Address).addresses;
-    let UserName = await AsyncStorage.getItem('username');
-    let Tel = await AsyncStorage.getItem('tel');
-    let Id = await AsyncStorage.getItem('id');
+    let UserName = await AsyncStorage.getItem("username");
+    let Tel = await AsyncStorage.getItem("tel");
+    let Id = await AsyncStorage.getItem("id");
     Id = JSON.parse(Id).id;
     axios({
       method: "POST",
@@ -60,29 +65,29 @@ export default class AddAddress extends React.Component {
       }
     }).then(response => {
       if (response.data === "string") {
-        Modal.alert("提示", "修改成功",
-          [{
-            text: "确定", onPress: () => {
+        Modal.alert("提示", "修改成功", [
+          {
+            text: "确定",
+            onPress: () => {
               //this.saveAddress();
               Address = [...Address, fullAddress];
-              let Addresses = { "addresses": Address };
-              AsyncStorage.setItem('addresses', JSON.stringify(Addresses));
+              let Addresses = { addresses: Address };
+              AsyncStorage.setItem("addresses", JSON.stringify(Addresses));
               DeviceEventEmitter.emit("reloadInfo", []);
               this.props.navigation.goBack();
             }
-          }]);
-      }
-      else {
+          }
+        ]);
+      } else {
         Modal.alert("提示", response.data);
       }
-    })
-
-  }
+    });
+  };
   onClick = () => {
     this.setState({
-      data: district,
+      data: district
     });
-  }
+  };
   render() {
     return (
       <View>
@@ -91,7 +96,7 @@ export default class AddAddress extends React.Component {
             data={this.state.data}
             cols={3}
             value={this.state.value}
-            onChange={(value) => this.setState({ value })}
+            onChange={value => this.setState({ value })}
           >
             <List.Item arrow="horizontal" last onClick={this.onClick}>
               选择地区
@@ -99,12 +104,14 @@ export default class AddAddress extends React.Component {
           </Picker>
           <InputItem
             editable={false}
-            onErrorPress={() => alert('clicked me')}
-            onChange={(value) => this.setState({ detailAddress: value })}
+            onErrorPress={() => alert("clicked me")}
+            onChange={value => this.setState({ detailAddress: value })}
           >
             详细地址
           </InputItem>
-          <Button type='primary' onClick={this.saveAddress}>保存地址</Button>
+          <Button type="primary" onClick={this.saveAddress}>
+            保存地址
+          </Button>
         </List>
       </View>
     );
@@ -114,8 +121,8 @@ export default class AddAddress extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
