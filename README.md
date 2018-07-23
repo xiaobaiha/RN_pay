@@ -1,87 +1,72 @@
 # WeShop
 
-desc
+a micro mobile payment platform
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+git clone https://github.com/xiaobaiha/RN_pay.git
 
 ### Prerequisites
 
 What things you need to install the software and how to install them
 
-```
-Give examples
-```
+Node.js
+Android Studio
+JDK 1.8
+React Native
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+You can follow the step in the website below
+    https://reactnative.cn/docs/0.51/getting-started.html
 
-Say what the step will be
+Or Follow the steps below if you are a developer with Windows
+1. Download Node.js and install
+    http://nodejs.cn/download/
 
-```
-Give the example
-```
+2. Install react native
+    npm install react-native-cli
 
-And repeat
+3. Download JDK 1.8 and install
+    http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
-```
-until finished
-```
+4. Download Android Studio and install
+    http://www.android-studio.org/
 
-End with an example of getting some data out of the system or using it for a little demo
+5. Install Android SDK in Android Studio
 
-## Running the tests
+6. Install Emulator in Android Studio
 
-Explain how to run the automated tests for this system
 
-### Break down into end to end tests
+## Running the demo
 
-Explain what these tests test and why
+1. cd RN_pay
 
-```
-Give an example
-```
+2. Open emulator in the Android Studio
 
-### And coding style tests
+3. npm install
 
-Explain what these tests test and why
+4. react-native run-android
 
-```
-Give an example
-```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+1. cd android
 
-## Built With
+2. ./gradlew clean
 
-- [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-- [Maven](https://maven.apache.org/) - Dependency Management
-- [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+3. ./gradlew assembleRelease
 
-## Contributing
+4. Find the APK file in RN_pay/android/build/outputs/apk
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
-- **Billie Thompson** - _Initial work_ - [PurpleBooth](https://github.com/PurpleBooth)
+- **Fei Zhijun** - _Initial work_ - [xiaobaiha](https://github.com/xiaobaiha)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+- **Wang Zhenan** - _Initial work_ - [Naluhodo](https://github.com/RedOvO)
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
 
-- Hat tip to anyone who's code was used
-- Inspiration
-- etc
