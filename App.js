@@ -7,7 +7,6 @@ import Information from "./src/pages/Information";
 import Remaining from "./src/pages/Remaining";
 import AddConfig from "./src/pages/AddConfig";
 import ModifyConfig from "./src/pages/ModifyConfig";
-import Page from "./src/pages/PageTest";
 import Login from "./src/pages/Login";
 import Signup from "./src/pages/Signup";
 import ChangePassword from "./src/pages/ChangePassword";
@@ -78,15 +77,6 @@ class AddAddressScreen extends React.Component {
   }
 }
 
-class PageScreen extends React.Component {
-  static navigationOptions = {
-    title: "demo"
-  };
-  render() {
-    return <Page />;
-  }
-}
-
 class AddConfigScreen extends React.Component {
   static navigationOptions = {
     title: "新增购物配置"
@@ -131,7 +121,6 @@ const RootStack = createStackNavigator(
     Orders: OrdersScreen,
     Remaining: RemainingScreen,
     AddConfig: AddConfigScreen,
-    Page: PageScreen,
     Login: LoginScreen,
     Signup: SignupScreen,
     ChangePassword: ChangePasswordScreen,

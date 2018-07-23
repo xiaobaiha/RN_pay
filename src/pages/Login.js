@@ -8,11 +8,20 @@ export default class Login extends React.Component {
   state = {
     name: "",
     password: "",
-    configLoaded: false
+    configLoaded: false,
+    closeFlag: false
   };
   componentWillMount() {
     // async 获取用户信息 若存在，跳转Home
     this.getUserName();
+  }
+  componentDidMount() {
+    const { closeFlag } = this.state;
+    if (!closeFlag) {
+      Toast.loading("加载数据中...", 1, () => {
+        this.setState({ closeFlag: true });
+      });
+    }
   }
   async getUserName() {
     let username = await AsyncStorage.getItem("username");
@@ -63,11 +72,13 @@ export default class Login extends React.Component {
   };
   setShopSet = async shopList => {
     await AsyncStorage.setItem("shopList", JSON.stringify(shopList));
-    this.props.navigation.navigate("Home");
+    Toast.loading("登录中...", 1, () => {
+      this.props.navigation.navigate("Home");
+    });
   };
   render() {
-    const { configLoaded } = this.state;
-    if (configLoaded) {
+    const { configLoaded, closeFlag } = this.state;
+    if (configLoaded && closeFlag) {
       return (
         <View>
           <InputItem
@@ -102,7 +113,6 @@ export default class Login extends React.Component {
         </View>
       );
     } else {
-      Toast.loading("Loading...", 3);
       return <View />;
     }
   }
