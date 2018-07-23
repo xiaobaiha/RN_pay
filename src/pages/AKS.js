@@ -3,9 +3,12 @@ import { Button, Modal } from "antd-mobile-rn";
 import {
   StyleSheet,
   ScrollView,
-  View,
   AsyncStorage,
-  DeviceEventEmitter
+  Text,
+  View,
+  Image,
+  DeviceEventEmitter,
+  ImageBackground
 } from "react-native";
 import axios from "axios";
 import { preURL } from "../config/axiosConfig";
@@ -49,20 +52,38 @@ export default class AKS extends React.Component {
   render() {
     const { configList } = this.state;
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.btn_group}>
-          {configList.map(item => {
-            return (
-              <Button
-                key={item.id}
-                onClick={() => this.handleClick(item.id)}
-                style={styles.btn}
-              >
-                {item.name}
-              </Button>
-            );
-          })}
-        </View>
+      <ScrollView>
+        <ImageBackground
+          source={require("../styles/imgs/index_bg.jpg")}
+          style={styles.outer}
+        >
+          <Text style={styles.weshopText}>WeShop</Text>
+          <Text style={styles.extraText}>一键购物</Text>
+          <View style={styles.btn_group}>
+            {configList.map(item => {
+              let tempStr =
+                "https://raw.githubusercontent.com/xiaobaiha/RN_pay/master/src/styles/imgs/" +
+                item.itemId +
+                ".jpg";
+              // alert(tempStr);
+              return (
+                <Button
+                  key={item.id}
+                  onClick={() => this.handleClick(item.id)}
+                  style={styles.btn}
+                >
+                  <Image
+                    style={styles.innerImg}
+                    source={{
+                      uri: tempStr
+                    }}
+                  />
+                  <Text>{item.name}</Text>
+                </Button>
+              );
+            })}
+          </View>
+        </ImageBackground>
       </ScrollView>
     );
   }
@@ -76,17 +97,40 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     flexWrap: "wrap"
   },
+  outer: {
+    flex: 1,
+    flexDirection: "column"
+  },
   btn_group: {
+    flex: 20,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
     flexWrap: "wrap",
-    margin: 20
+    width: "100%",
+    height: "100%"
   },
   btn: {
-    marginBottom: 50,
-    width: 100,
-    height: 100,
-    borderRadius: 50
+    width: 150,
+    height: 200,
+    margin: 10,
+    flexDirection: "column"
+  },
+  innerImg: {
+    width: 300,
+    height: 350
+  },
+  weshopText: {
+    flex: 3,
+    fontSize: 40,
+    marginTop: 40,
+    marginLeft: 20,
+    color: "white"
+  },
+  extraText: {
+    flex: 2,
+    fontSize: 30,
+    marginLeft: 20,
+    color: "white"
   }
 });
