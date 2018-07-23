@@ -3,7 +3,24 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { Button, InputItem, Modal } from "antd-mobile-rn";
 import axios from "axios";
 import { preURL } from "../config/axiosConfig";
+import InputItemStyle from "antd-mobile-rn/lib/input-item/style/index.native";
 
+let newInputItemStyle = {
+  ...InputItemStyle,
+  container: {
+    ...InputItemStyle.container,
+    borderBottomColor: "#3b4757"
+  },
+  input: {
+    ...InputItemStyle.input,
+    backgroundColor: "white",
+    justifyContent: "center",
+    textAlign: "center",
+    height: 40,
+    width: 300,
+    borderRadius: 20
+  }
+};
 export default class Signup extends React.Component {
   state = {
     name: "",
@@ -39,11 +56,12 @@ export default class Signup extends React.Component {
   };
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Image source={require("../styles/imgs/cart.png")} />
         <Text style={styles.weshopText}>WeShop</Text>
         <View style={styles.inputContainer}>
           <InputItem
+            styles={StyleSheet.create(newInputItemStyle)}
             onErrorPress={() => alert("clicked me")}
             onChange={value => {
               this.setState({
@@ -51,10 +69,9 @@ export default class Signup extends React.Component {
               });
             }}
             placeholder="用户名"
-          >
-            用户名
-          </InputItem>
+          />
           <InputItem
+            styles={StyleSheet.create(newInputItemStyle)}
             onErrorPress={() => alert("clicked me")}
             onChange={value => {
               this.setState({
@@ -63,10 +80,9 @@ export default class Signup extends React.Component {
             }}
             type="password"
             placeholder="密码"
-          >
-            密码
-          </InputItem>
+          />
           <InputItem
+            styles={StyleSheet.create(newInputItemStyle)}
             onErrorPress={() => alert("clicked me")}
             onChange={value => {
               this.setState({
@@ -75,11 +91,13 @@ export default class Signup extends React.Component {
             }}
             type="password"
             placeholder="请再输入一遍密码"
-          >
-            重复密码
-          </InputItem>
+          />
         </View>
-        <Button type="primary" onClick={this.handleSignup}>
+        <Button
+          style={styles.loginBtn}
+          type="primary"
+          onClick={this.handleSignup}
+        >
           注册
         </Button>
       </View>
@@ -102,7 +120,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   inputContainer: {
-    height: 130,
+    height: 180,
     justifyContent: "space-around",
     width: 300
   },
