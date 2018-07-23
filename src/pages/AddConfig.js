@@ -209,7 +209,12 @@ export default class AddConfig extends React.Component {
           animationType="slide-up"
           onClose={() => this.setState({ productListVisible: false })}
         >
-          <View style={{ paddingVertical: 20, paddingHorizontal: 20 }}>
+          <ScrollView
+            contentContainerStyle={{
+              paddingVertical: 20,
+              paddingHorizontal: 20
+            }}
+          >
             {productList.map(item => {
               return (
                 <RadioItem
@@ -231,7 +236,7 @@ export default class AddConfig extends React.Component {
                 </RadioItem>
               );
             })}
-          </View>
+          </ScrollView>
           <Button onClick={() => this.setState({ productListVisible: false })}>
             关闭
           </Button>
@@ -242,7 +247,12 @@ export default class AddConfig extends React.Component {
           animationType="slide-up"
           onClose={() => this.setState({ addressListVisible: false })}
         >
-          <View style={{ paddingVertical: 20, paddingHorizontal: 20 }}>
+          <ScrollView
+            contentContainerStyle={{
+              paddingVertical: 20,
+              paddingHorizontal: 20
+            }}
+          >
             {address.map((item, index) => {
               return (
                 <RadioItem
@@ -262,7 +272,7 @@ export default class AddConfig extends React.Component {
                 </RadioItem>
               );
             })}
-          </View>
+          </ScrollView>
           <Button onClick={() => this.setState({ addressListVisible: false })}>
             关闭
           </Button>

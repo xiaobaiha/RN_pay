@@ -2,7 +2,7 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  View,
+  ScrollView,
   AsyncStorage,
   DeviceEventEmitter
 } from "react-native";
@@ -80,7 +80,7 @@ export default class Information extends React.Component {
   render() {
     let { name, phone, changeDisabled, address } = this.state;
     return (
-      <View>
+      <ScrollView>
         <InputItem
           editable={false}
           onErrorPress={() => alert("clicked me")}
@@ -126,7 +126,7 @@ export default class Information extends React.Component {
         <Button type="primary" onClick={this.toggleChangeState}>
           {changeDisabled ? "修改信息" : "提交修改"}
         </Button>
-      </View>
+      </ScrollView>
     );
   }
 }

@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight,
+  ScrollView,
   AsyncStorage,
   DeviceEventEmitter
 } from "react-native";
@@ -57,7 +57,7 @@ export default class ShoppingConfig extends React.Component {
         let shopList = { shopList: ShopList };
         AsyncStorage.setItem("shopList", JSON.stringify(shopList));
         this.loadConfig();
-        DeviceEventEmitter.emit('reloadConfig2',[]);
+        DeviceEventEmitter.emit("reloadConfig2", []);
       } else {
         Modal.alert("提示", "删除失败");
       }
@@ -75,7 +75,7 @@ export default class ShoppingConfig extends React.Component {
   render() {
     const { configList } = this.state;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <List renderHeader={() => "一键购物配置"}>
           {configList.map(item => {
             return (
@@ -107,7 +107,7 @@ export default class ShoppingConfig extends React.Component {
         >
           新增
         </Button>
-      </View>
+      </ScrollView>
     );
   }
 }

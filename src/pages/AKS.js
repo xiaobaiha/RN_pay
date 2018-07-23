@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal } from "antd-mobile-rn";
 import {
   StyleSheet,
-  Text,
+  ScrollView,
   View,
   AsyncStorage,
   DeviceEventEmitter
@@ -49,7 +49,7 @@ export default class AKS extends React.Component {
   render() {
     const { configList } = this.state;
     return (
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.btn_group}>
           {configList.map(item => {
             return (
@@ -63,7 +63,7 @@ export default class AKS extends React.Component {
             );
           })}
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
