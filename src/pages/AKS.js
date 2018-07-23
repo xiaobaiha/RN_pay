@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   btn: {
-    width: 170,
-    height: 200,
+    width: 130,
+    height: 170,
     margin: 10,
     flexDirection: "column",
     justifyContent: "center",
@@ -149,8 +149,8 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   innerImg: {
-    width: 150,
-    height: 150
+    width: 120,
+    height: 130
   },
   weshopText: {
     flex: 3,
