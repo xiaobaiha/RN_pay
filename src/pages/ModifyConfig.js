@@ -60,7 +60,7 @@ export default class ModifyConfig extends React.Component {
     // 若存在 return true, 否则false
     let flag = 0;
     return this.getShopList().then(ShopList => {
-      ShopList.filter(item=>item.id!==this.state.ID).forEach(item => {
+      ShopList.filter(item => item.id !== this.state.ID).forEach(item => {
         if (item.name === name) {
           flag = 1;
         }
@@ -78,9 +78,18 @@ export default class ModifyConfig extends React.Component {
     return new Promise(resolve => resolve(ShopList));
   }
   handleModifyConfig = () => {
+    const { selectProduct, selectAddress, numbers, configName } = this.state;
     this.configNameExist(this.state.configName).then(value => {
       if (value) {
         Modal.alert("增加配置失败", "配置名称已存在");
+      } else if (numbers === 0) {
+        Modal.alert("增加配置失败", "购买数量不能为0");
+      } else if (configName === "") {
+        Modal.alert("增加配置失败", "名称不能为空");
+      } else if (selectAddress === -1) {
+        Modal.alert("增加配置失败", "未选择地址");
+      } else if (selectProduct === -1) {
+        Modal.alert("增加配置失败", "未选择商品");
       } else {
         this.modifyShop();
       }
@@ -92,7 +101,7 @@ export default class ModifyConfig extends React.Component {
     UserId = JSON.parse(UserId).id;
     axios({
       method: "PUT",
-      url: preURL + "/shop-setting/"+this.state.ID,
+      url: preURL + "/shop-setting/" + this.state.ID,
       dataType: "json",
       data: {
         address: this.state.address[this.state.selectAddress],
@@ -133,11 +142,11 @@ export default class ModifyConfig extends React.Component {
       intervalTime: 0, //?
       name: this.state.configName
     };
-    ShopList.forEach(item=>{
-      if(item.id === Id){
+    ShopList.forEach(item => {
+      if (item.id === Id) {
         ShopList[ShopList.indexOf(item)] = modifyShop;
       }
-    })
+    });
     let shopList = { shopList: ShopList };
     await AsyncStorage.setItem("shopList", JSON.stringify(shopList));
     //通知ShoppingConfig更新数据
@@ -186,9 +195,11 @@ export default class ModifyConfig extends React.Component {
           <InputItem
             onErrorPress={() => alert("clicked me")}
             onChange={value => {
-              this.setState({
-                numbers: value
-              });
+              if (!isNaN(parseInt(value))) {
+                this.setState({
+                  numbers: parseInt(value)
+                });
+              }
             }}
             value={"" + numbers}
             type="number"

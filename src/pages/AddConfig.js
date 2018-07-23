@@ -1,8 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View, AsyncStorage, DeviceEventEmitter } from 'react-native';
-import axios from 'axios';
-import { preURL } from '../config/axiosConfig';
-import { List, Modal, Button, Radio, InputItem } from 'antd-mobile-rn';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  AsyncStorage,
+  DeviceEventEmitter
+} from "react-native";
+import axios from "axios";
+import { preURL } from "../config/axiosConfig";
+import { List, Modal, Button, Radio, InputItem } from "antd-mobile-rn";
 
 const Item = List.Item;
 const RadioItem = Radio.RadioItem;
@@ -12,72 +18,73 @@ export default class AddConfig extends React.Component {
   state = {
     productList: [], // 商品列表
     numbers: 0, // 商品数量
-    address: ['13123', '123123'], // 地址
-    phone: '', // 联系电话
+    address: [], // 地址
+    phone: "", // 联系电话
     productListVisible: false,
     selectProduct: -1,
     selectAddress: -1,
     addressListVisible: false,
-    configName: ''
-  }
+    configName: ""
+  };
   componentWillMount() {
     // axios 获取商品列表
     axios({
       method: "GET",
       url: preURL + "/items"
     }).then(response => {
-      console.log(response)
-      //alert(JSON.stringify(response.data))
-      this.setState({ productList: response.data })
+      this.setState({ productList: response.data });
     });
     // asyncstorage 获取地址
-    this.getArray()
+    this.getArray();
   }
   async getArray() {
-    let Address = await AsyncStorage.getItem('addresses');
+    let Address = await AsyncStorage.getItem("addresses");
     this.setState({ address: JSON.parse(Address).addresses });
-    //alert(this.state.address);
   }
-  configNameExist = async (name) => {
+  configNameExist = async name => {
     // async 检查配置名称是否存在
     // 若存在 return true, 否则false
     let flag = 0;
     return this.getShopList().then(ShopList => {
       ShopList.forEach(item => {
-        //alert("itemname:"+ item.name)
         if (item.name === name) {
           flag = 1;
         }
-      })
-      if(flag === 1){
+      });
+      if (flag === 1) {
         return new Promise(resolve => resolve(true));
-      }
-      else{
+      } else {
         return new Promise(resolve => resolve(false));
       }
-      
     });
-    //alert(JSON.stringify(ShopList));
-  }
+  };
   async getShopList() {
-    let ShopList = await AsyncStorage.getItem('shopList');
+    let ShopList = await AsyncStorage.getItem("shopList");
     ShopList = JSON.parse(ShopList).shopList;
     //alert(JSON.stringify(ShopList))
     return new Promise(resolve => resolve(ShopList));
   }
   handleAddConfig = () => {
+    const { selectProduct, selectAddress, numbers, configName } = this.state;
     this.configNameExist(this.state.configName).then(value => {
       if (value) {
-        Modal.alert('增加配置失败', '配置名称已存在');
-      }
-      else {
+        Modal.alert("增加配置失败", "配置名称已存在");
+      } else if (numbers === 0) {
+        Modal.alert("增加配置失败", "购买数量不能为0");
+      } else if (configName === "") {
+        Modal.alert("增加配置失败", "名称不能为空");
+      } else if (selectAddress === -1) {
+        Modal.alert("增加配置失败", "未选择地址");
+      } else if (selectProduct === -1) {
+        Modal.alert("增加配置失败", "未选择商品");
+      } else {
         this.addShop();
       }
     });
-  }
-  addShop = async()=>{
+  };
+  addShop = async () => {
     // axios 增加购物配置
-    let UserId = await AsyncStorage.getItem('id');
+    let UserId = await AsyncStorage.getItem("id");
     UserId = JSON.parse(UserId).id;
     axios({
       method: "POST",
@@ -96,39 +103,48 @@ export default class AddConfig extends React.Component {
       }
     }).then(response => {
       if (response.status === 200) {
-        Modal.alert("提示", "添加成功",
-          [{
-            text: "确定", onPress: () => { this.props.navigation.goBack() }
-          }]);
+        Modal.alert("提示", "添加成功", [
+          {
+            text: "确定",
+            onPress: () => {
+              this.props.navigation.goBack();
+            }
+          }
+        ]);
         this.reloadProductList(UserId, response.data.id);
-      }
-      else {
+      } else {
         Modal.alert("提示", "添加失败");
       }
-    })
-  }
+    });
+  };
   async reloadProductList(UserId, Id) {
-    let ShopList = await AsyncStorage.getItem('shopList');
+    let ShopList = await AsyncStorage.getItem("shopList");
     ShopList = JSON.parse(ShopList).shopList;
     let newShop = {
-      id: Id, 
+      id: Id,
       userId: UserId,
       itemId: this.state.selectProduct,
       amount: this.state.numbers,
       address: this.state.address[this.state.selectAddress],
       intervalTime: 0, //?
       name: this.state.configName
-    }
+    };
     ShopList = [...ShopList, newShop];
-    let shopList = { "shopList": ShopList };
-    await AsyncStorage.setItem('shopList', JSON.stringify(shopList));
+    let shopList = { shopList: ShopList };
+    await AsyncStorage.setItem("shopList", JSON.stringify(shopList));
     //通知ShoppingConfig更新数据
     DeviceEventEmitter.emit("reloadConfig1", []);
     //通知AKS更新数据
     DeviceEventEmitter.emit("reloadConfig2", []);
   }
   render() {
-    const { productList, selectProduct, selectAddress, address } = this.state;
+    const {
+      numbers,
+      productList,
+      selectProduct,
+      selectAddress,
+      address
+    } = this.state;
     let selectExtra;
     productList.forEach(item => {
       if (item.id === selectProduct) {
@@ -137,38 +153,51 @@ export default class AddConfig extends React.Component {
     });
     return (
       <View>
-        <List renderHeader={() => '添加配置'}>
+        <List renderHeader={() => "添加配置"}>
           <InputItem
-            onErrorPress={() => alert('clicked me')}
-            onChange={(value) => {
+            onErrorPress={() => alert("clicked me")}
+            onChange={value => {
               this.setState({
-                configName: value,
+                configName: value
               });
             }}
-            type='text'
+            type="text"
             placeholder="配置名称"
           >
             配置名称
-            </InputItem>
-          <Item arrow="horizontal" extra={selectExtra ? selectExtra : ''} onClick={() => this.setState({ productListVisible: true })}>
+          </InputItem>
+          <Item
+            arrow="horizontal"
+            extra={selectExtra ? selectExtra : ""}
+            onClick={() => this.setState({ productListVisible: true })}
+          >
             选择商品
           </Item>
           <InputItem
-            onErrorPress={() => alert('clicked me')}
-            onChange={(value) => {
-              this.setState({
-                buyAmount: value,
-              });
+            onErrorPress={() => alert("clicked me")}
+            onChange={value => {
+              if (!isNaN(parseInt(value))) {
+                this.setState({
+                  numbers: parseInt(value)
+                });
+              }
             }}
-            type='number'
+            value={"" + numbers}
+            type="digit"
             placeholder="购买数量"
           >
             购买数量
-            </InputItem>
-          <Item arrow="horizontal" extra={selectAddress > -1 ? '已选择' : ''} onClick={() => this.setState({ addressListVisible: true })}>
+          </InputItem>
+          <Item
+            arrow="horizontal"
+            extra={selectAddress > -1 ? "已选择" : ""}
+            onClick={() => this.setState({ addressListVisible: true })}
+          >
             选择地址
           </Item>
-          <Button type='primary' onClick={this.handleAddConfig}>增加配置</Button>
+          <Button type="primary" onClick={this.handleAddConfig}>
+            增加配置
+          </Button>
         </List>
         <Modal
           popup
@@ -178,26 +207,30 @@ export default class AddConfig extends React.Component {
         >
           <View style={{ paddingVertical: 20, paddingHorizontal: 20 }}>
             {productList.map(item => {
-              return (<RadioItem
-                thumb='../styles/imgs/buy.png'
-                checked={selectProduct === item.id}
-                onChange={(event) => {
-                  if (event.target.checked) {
-                    this.setState({ selectProduct: item.id });
-                  }
-                  this.setState({ productListVisible: false })
-                }}
-                key={item.id}
-              >
-                <View>
-                  <Text>{item.itemName}</Text>
-                  <Text>价格:{item.price}</Text>
-                  <Text>商品描述:{item.description}</Text>
-                </View>
-              </RadioItem>)
+              return (
+                <RadioItem
+                  thumb="../styles/imgs/buy.png"
+                  checked={selectProduct === item.id}
+                  onChange={event => {
+                    if (event.target.checked) {
+                      this.setState({ selectProduct: item.id });
+                    }
+                    this.setState({ productListVisible: false });
+                  }}
+                  key={item.id}
+                >
+                  <View>
+                    <Text>{item.itemName}</Text>
+                    <Text>价格:{item.price}</Text>
+                    <Text>商品描述:{item.description}</Text>
+                  </View>
+                </RadioItem>
+              );
             })}
           </View>
-          <Button onClick={() => this.setState({ productListVisible: false })}>关闭</Button>
+          <Button onClick={() => this.setState({ productListVisible: false })}>
+            关闭
+          </Button>
         </Modal>
         <Modal
           popup
@@ -207,24 +240,28 @@ export default class AddConfig extends React.Component {
         >
           <View style={{ paddingVertical: 20, paddingHorizontal: 20 }}>
             {address.map((item, index) => {
-              return (<RadioItem
-                thumb='../styles/imgs/buy.png'
-                checked={selectAddress === index}
-                onChange={(event) => {
-                  if (event.target.checked) {
-                    this.setState({ selectAddress: index });
-                  }
-                  this.setState({ addressListVisible: false })
-                }}
-                key={index}
-              >
-                <View>
-                  <Text>{item}</Text>
-                </View>
-              </RadioItem>)
+              return (
+                <RadioItem
+                  thumb="../styles/imgs/buy.png"
+                  checked={selectAddress === index}
+                  onChange={event => {
+                    if (event.target.checked) {
+                      this.setState({ selectAddress: index });
+                    }
+                    this.setState({ addressListVisible: false });
+                  }}
+                  key={index}
+                >
+                  <View>
+                    <Text>{item}</Text>
+                  </View>
+                </RadioItem>
+              );
             })}
           </View>
-          <Button onClick={() => this.setState({ addressListVisible: false })}>关闭</Button>
+          <Button onClick={() => this.setState({ addressListVisible: false })}>
+            关闭
+          </Button>
         </Modal>
       </View>
     );
@@ -234,8 +271,8 @@ export default class AddConfig extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
