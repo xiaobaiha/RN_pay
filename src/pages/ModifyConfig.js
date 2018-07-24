@@ -82,15 +82,19 @@ export default class ModifyConfig extends React.Component {
     const { selectProduct, selectAddress, numbers, configName } = this.state;
     this.configNameExist(this.state.configName).then(value => {
       if (value) {
-        Modal.alert("增加配置失败", "配置名称已存在");
+        Modal.alert("修改配置失败", "配置名称已存在");
       } else if (numbers === 0) {
-        Modal.alert("增加配置失败", "购买数量不能为0");
+        Modal.alert("修改配置失败", "购买数量不能为0");
+      } else if (numbers > 100) {
+        Modal.alert("修改配置失败", "购买数量不得超过100个");
       } else if (configName === "") {
-        Modal.alert("增加配置失败", "名称不能为空");
+        Modal.alert("修改配置失败", "名称不能为空");
+      } else if (configName.length > 10) {
+        Modal.alert("修改配置失败", "名称不能超过10个字符");
       } else if (selectAddress === -1) {
-        Modal.alert("增加配置失败", "未选择地址");
+        Modal.alert("修改配置失败", "未选择地址");
       } else if (selectProduct === -1) {
-        Modal.alert("增加配置失败", "未选择商品");
+        Modal.alert("修改配置失败", "未选择商品");
       } else {
         this.modifyShop();
       }

@@ -25,7 +25,7 @@ export default class AddAddress extends React.Component {
     } else if (detailAddress === "") {
       Modal.alert("增加地址失败", "请输入详细地址");
       return;
-    }
+    } 
     let name = [];
     district.forEach(item1 => {
       if (item1.value === value[0]) {
@@ -42,7 +42,12 @@ export default class AddAddress extends React.Component {
         });
       }
     });
+    
     let fullAddress = name.join("") + detailAddress;
+    if (fullAddress.length > 100) {
+      Modal.alert("增加地址失败", "地址过长");
+      return;
+    }
     // axios 增加地址
     let Address = await AsyncStorage.getItem("addresses");
     Address = JSON.parse(Address).addresses;

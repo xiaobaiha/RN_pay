@@ -32,6 +32,9 @@ export default class Signup extends React.Component {
     if (name === "") {
       Modal.alert("注册错误", "用户名不能为空");
       return;
+    } else if(name.length > 30){
+      Modal.alert("注册错误", "用户名过长");
+      return;
     } else if (password !== passwordRepeat) {
       Modal.alert("注册错误", "两次输入的密码不同");
       return;
