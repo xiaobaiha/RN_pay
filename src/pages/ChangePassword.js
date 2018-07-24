@@ -37,6 +37,17 @@ export default class ChangePassword extends React.Component {
     });
   }
   handleChangePassword = async () => {
+    const { currentPassword, newPassword, newPasswordRepeat } = this.state;
+    if (currentPassword === newPassword) {
+      Modal.alert("修改失败", "新密码与原密码相同");
+      return;
+    } else if (newPassword !== newPasswordRepeat) {
+      Modal.alert("修改失败", "两次输入的密码不同");
+      return;
+    } else if (newPassword.length < 6) {
+      Modal.alert("修改失败", "密码必须大于等于6位");
+      return;
+    }
     // axios 修改密码
     let username = await AsyncStorage.getItem("username");
     axios({

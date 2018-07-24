@@ -37,6 +37,17 @@ export default class Information extends React.Component {
     this.setState({ userId: JSON.parse(UserId).id });
   };
   toggleChangeState = async () => {
+    let flag = 0;
+    this.state.address.forEach(item=>{
+      if(item.length > 100){
+        let index = this.state.address.indexOf(item) + 1
+        Modal.alert("修改失败","地址"+ index +"过长");
+        flag = 1;
+      }
+    });
+    if(flag === 1){
+      return;
+    }
     let { changeDisabled } = this.state;
     if (changeDisabled) {
       this.setState({ changeDisabled: !changeDisabled });

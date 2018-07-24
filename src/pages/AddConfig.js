@@ -72,8 +72,12 @@ export default class AddConfig extends React.Component {
         Modal.alert("增加配置失败", "配置名称已存在");
       } else if (numbers === 0) {
         Modal.alert("增加配置失败", "购买数量不能为0");
+      } else if (numbers > 100) {
+        Modal.alert("增加配置失败", "购买数量不得超过100个");
       } else if (configName === "") {
         Modal.alert("增加配置失败", "名称不能为空");
+      } else if (configName.length > 10) {
+        Modal.alert("增加配置失败", "名称不能超过10个字符");
       } else if (selectAddress === -1) {
         Modal.alert("增加配置失败", "未选择地址");
       } else if (selectProduct === -1) {
