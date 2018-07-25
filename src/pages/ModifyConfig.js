@@ -112,7 +112,7 @@ export default class ModifyConfig extends React.Component {
       data: {
         address: this.state.address[this.state.selectAddress],
         amount: this.state.numbers,
-        intervalTime: 3, //?
+        intervalTime: 10, //?
         itemId: this.state.selectProduct,
         userId: UserId,
         name: this.state.configName
@@ -145,7 +145,7 @@ export default class ModifyConfig extends React.Component {
       itemId: this.state.selectProduct,
       amount: this.state.numbers,
       address: this.state.address[this.state.selectAddress],
-      intervalTime: 3, //?
+      intervalTime: 10, //?
       name: this.state.configName
     };
     ShopList.forEach(item => {
