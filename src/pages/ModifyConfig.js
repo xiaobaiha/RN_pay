@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   ScrollView,
   AsyncStorage,
   DeviceEventEmitter
@@ -234,7 +235,11 @@ export default class ModifyConfig extends React.Component {
           onClose={() => this.setState({ productListVisible: false })}
         >
           <ScrollView
-            contentContainerStyle={{ paddingVertical: 20, paddingHorizontal: 20 }}>
+            contentContainerStyle={{
+              paddingVertical: 20,
+              paddingHorizontal: 20
+            }}
+          >
             {productList.map(item => {
               return (
                 <RadioItem
@@ -248,10 +253,22 @@ export default class ModifyConfig extends React.Component {
                   }}
                   key={item.id}
                 >
-                  <View>
-                    <Text>{item.itemName}</Text>
-                    <Text>价格:{item.price}</Text>
-                    <Text>商品描述:{item.description}</Text>
+                  <View style={styles.outer}>
+                    <View>
+                      <Image
+                        style={styles.innerImg}
+                        source={{
+                          uri: `https://raw.githubusercontent.com/xiaobaiha/RN_pay/master/src/styles/imgs/${
+                            item.id
+                          }.jpg`
+                        }}
+                      />
+                    </View>
+                    <View>
+                      <Text>{item.itemName}</Text>
+                      <Text>价格:{item.price}</Text>
+                      <Text>商品描述:{item.description}</Text>
+                    </View>
                   </View>
                 </RadioItem>
               );
@@ -308,5 +325,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  outer: {
+    flexDirection: "row"
+  },
+  innerImg: {
+    width: 50,
+    height: 50,
+    margin: 10
   }
 });

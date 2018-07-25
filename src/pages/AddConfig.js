@@ -5,7 +5,8 @@ import {
   View,
   ScrollView,
   AsyncStorage,
-  DeviceEventEmitter
+  DeviceEventEmitter,
+  Image
 } from "react-native";
 import axios from "axios";
 import { preURL } from "../config/axiosConfig";
@@ -233,10 +234,22 @@ export default class AddConfig extends React.Component {
                   }}
                   key={item.id}
                 >
-                  <View>
-                    <Text>{item.itemName}</Text>
-                    <Text>价格:{item.price}</Text>
-                    <Text>商品描述:{item.description}</Text>
+                  <View style={styles.outer}>
+                    <View>
+                      <Image
+                        style={styles.innerImg}
+                        source={{
+                          uri: `https://raw.githubusercontent.com/xiaobaiha/RN_pay/master/src/styles/imgs/${
+                            item.id
+                          }.jpg`
+                        }}
+                      />
+                    </View>
+                    <View>
+                      <Text>{item.itemName}</Text>
+                      <Text>价格:{item.price}</Text>
+                      <Text>商品描述:{item.description}</Text>
+                    </View>
                   </View>
                 </RadioItem>
               );
@@ -292,5 +305,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  outer: {
+    flexDirection: "row"
+  },
+  innerImg: {
+    width: 50,
+    height: 50,
+    margin: 10
   }
 });
