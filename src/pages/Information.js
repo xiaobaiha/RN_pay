@@ -38,14 +38,14 @@ export default class Information extends React.Component {
   };
   toggleChangeState = async () => {
     let flag = 0;
-    this.state.address.forEach(item=>{
-      if(item.length > 100){
-        let index = this.state.address.indexOf(item) + 1
-        Modal.alert("修改失败","地址"+ index +"过长");
+    this.state.address.forEach(item => {
+      if (item.length > 100) {
+        let index = this.state.address.indexOf(item) + 1;
+        Modal.alert("修改失败", "地址" + index + "过长");
         flag = 1;
       }
     });
-    if(flag === 1){
+    if (flag === 1) {
       return;
     }
     let { changeDisabled } = this.state;
@@ -91,7 +91,7 @@ export default class Information extends React.Component {
   render() {
     let { name, phone, changeDisabled, address } = this.state;
     return (
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <InputItem
           editable={false}
           onErrorPress={() => alert("clicked me")}
@@ -145,8 +145,6 @@ export default class Information extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: "#fff"
   }
 });

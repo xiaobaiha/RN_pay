@@ -2,7 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View, AsyncStorage } from "react-native";
 import axios from "axios";
 import { preURL } from "../config/axiosConfig";
-
+import { List } from "antd-mobile-rn";
+const Item = List.Item;
 export default class Pay extends React.Component {
   state = {
     remains: 0
@@ -25,8 +26,19 @@ export default class Pay extends React.Component {
   render() {
     const { remains } = this.state;
     return (
-      <View style={styles.container}>
-        <Text>您可用余额为{remains}元。</Text>
+      <View>
+        <View style={styles.container}>
+          <Text style={styles.remainText}>账户余额(元)：</Text>
+          <Text style={styles.numberText}>{"" + remains + ".00"}</Text>
+        </View>
+        <List>
+          <Item
+            arrow="horizontal"
+            onClick={() => this.props.navigation.navigate("Pay")}
+          >
+            充值
+          </Item>
+        </List>
       </View>
     );
   }
@@ -34,9 +46,18 @@ export default class Pay extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: "#1c81d3"
+  },
+  remainText: {
+    color: "#85ccf7",
+    fontSize: 20,
+    marginTop: 40,
+    marginLeft: 20,
+    marginBottom: 20
+  },
+  numberText: {
+    color: "white",
+    fontSize: 60,
+    margin: 20
   }
 });

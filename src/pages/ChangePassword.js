@@ -3,7 +3,26 @@ import { StyleSheet, Text, View, AsyncStorage, Alert } from "react-native";
 import axios from "axios";
 import { preURL } from "../config/axiosConfig";
 import { Button, InputItem, List, Modal } from "antd-mobile-rn";
+import InputItemStyle from "antd-mobile-rn/lib/input-item/style/index.native";
 
+let newInputItemStyle = {
+  ...InputItemStyle,
+  container: {
+    ...InputItemStyle.container,
+    borderBottomColor: "#3b4757",
+    width: "85%",
+    marginBottom: 20
+  },
+  input: {
+    ...InputItemStyle.input,
+    backgroundColor: "white",
+    justifyContent: "center",
+    textAlign: "center",
+    height: 40,
+    width: 300,
+    borderRadius: 20
+  }
+};
 export default class ChangePassword extends React.Component {
   state = {
     currentStep: 0,
@@ -79,8 +98,9 @@ export default class ChangePassword extends React.Component {
     const { currentStep } = this.state;
     if (currentStep === 0) {
       return (
-        <View>
+        <View style={styles.container}>
           <InputItem
+            styles={StyleSheet.create(newInputItemStyle)}
             onErrorPress={() => alert("clicked me")}
             onChange={value => {
               this.setState({
@@ -88,17 +108,18 @@ export default class ChangePassword extends React.Component {
               });
             }}
             type="password"
-            placeholder="密码"
-          >
-            当前密码
-          </InputItem>
-          <Button onClick={this.handleNext}>下一步</Button>
+            placeholder="当前密码"
+          />
+          <Button style={styles.btn} onClick={this.handleNext}>
+            下一步
+          </Button>
         </View>
       );
     } else if (currentStep === 1) {
       return (
-        <View>
+        <View style={styles.container}>
           <InputItem
+            styles={StyleSheet.create(newInputItemStyle)}
             onErrorPress={() => alert("clicked me")}
             onChange={value => {
               this.setState({
@@ -108,10 +129,9 @@ export default class ChangePassword extends React.Component {
             value={this.state.newPassword}
             type="password"
             placeholder="新密码"
-          >
-            新密码
-          </InputItem>
+          />
           <InputItem
+            styles={StyleSheet.create(newInputItemStyle)}
             onErrorPress={() => alert("clicked me")}
             onChange={value => {
               this.setState({
@@ -119,11 +139,15 @@ export default class ChangePassword extends React.Component {
               });
             }}
             type="password"
-            placeholder="新密码"
+            placeholder="请再输入一遍新密码"
+          />
+          <Button
+            type="primary"
+            style={styles.btn}
+            onClick={this.handleChangePassword}
           >
-            请再输入一遍
-          </InputItem>
-          <Button onClick={this.handleChangePassword}>修改密码</Button>
+            修改密码
+          </Button>
         </View>
       );
     }
@@ -133,8 +157,11 @@ export default class ChangePassword extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: "#3b4757",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  btn: {
+    width: "80%"
   }
 });

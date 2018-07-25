@@ -118,7 +118,7 @@ class RemainingScreen extends React.Component {
     title: "余额"
   };
   render() {
-    return <Remaining />;
+    return <Remaining navigation={this.props.navigation} />;
   }
 }
 
